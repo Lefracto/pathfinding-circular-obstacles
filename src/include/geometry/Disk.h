@@ -18,18 +18,22 @@ namespace geometry {
         Disk(Point c, double r, size_t id = 0)
             : center(c), radius(r), id(id) {}
 
-        /*
-        bool contains(const Point& p) const {
+        /**
+         * Check if a point is inside or on the boundary of this disk
+         */
+        [[nodiscard]] bool contains(const Point& p) const {
             return center.distance(p) <= radius;
         }
 
+        /*
         [[nodiscard]] bool intersects(const Disk& other) const {
             double dist = center.distance(other.center);
             return dist <= (radius + other.radius);
         }
 
         [[nodiscard]] double circumference() const {
-            return 2.0 * M_PI * radius;
+            constexpr double PI = 3.14159265358979323846;
+            return 2.0 * PI * radius;
         }
 
         bool intersects_segment(const Point& a, const Point& b) const;

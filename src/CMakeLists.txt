@@ -10,6 +10,11 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Ручное указание путей к SFML (из вашего установленного vcpkg)
 set(SFML_ROOT "Q:/Diploma/vcpkg/installed/x64-mingw-dynamic")
+set(VCPKG_ROOT "Q:/Diploma/vcpkg")
+set(VCPKG_INSTALLED_DIR "${VCPKG_ROOT}/installed/x64-mingw-dynamic")
+# Добавляем пути для поиска пакетов
+list(APPEND CMAKE_PREFIX_PATH "${VCPKG_INSTALLED_DIR}/share")
+list(APPEND CMAKE_PREFIX_PATH "${VCPKG_INSTALLED_DIR}")
 
 # Создаем импортированные цели для SFML
 add_library(SFML::System SHARED IMPORTED GLOBAL)
@@ -35,11 +40,26 @@ set_target_properties(SFML::Graphics PROPERTIES
         INTERFACE_LINK_LIBRARIES "SFML::Window;SFML::System"
 )
 
+# nlohmann-json via FetchContent (header-only library)
+include(FetchContent)
+FetchContent_Declare(
+    json
+    GIT_REPOSITORY https://github.com/nlohmann/json.git
+    GIT_TAG v3.12.0
+)
+FetchContent_MakeAvailable(json)
+
 # Исходные файлы
 set(SOURCES
         main.cpp
         algorithms/graph/GridGraphBuilder.cpp
+        algorithms/graph/VisibilityGraphBuilder.cpp
         visualization/SceneVisualizer.cpp
+        visualization/SceneRenderer.cpp
+        visualization/GraphRenderer.cpp
+        visualization/UIManager.cpp
+        visualization/CameraController.cpp
+        serialization/SceneSerializer.cpp
 )
 
 # Заголовочные файлы
@@ -53,7 +73,11 @@ set(HEADERS
         include/algorithms/Planner.h
         include/algorithms/GraphBuilder.h
         include/algorithms/Graph.h
+        include/algorithms/GridGraphBuilder.h
+        include/algorithms/VisibilityGraphBuilder.h
         include/visualization/SceneVisualizer.h
+        include/visualization/GraphRenderer.h
+        include/serialization/SceneSerializer.h
 )
 
 add_executable(Diploma ${SOURCES} ${HEADERS})
@@ -64,11 +88,29 @@ target_include_directories(Diploma PRIVATE
         "${SFML_ROOT}/include"
 )
 
+# Подключаем ImGui вручную (как SFML)
+add_library(imgui::imgui STATIC IMPORTED GLOBAL)
+set_target_properties(imgui::imgui PROPERTIES
+        IMPORTED_LOCATION "${VCPKG_INSTALLED_DIR}/lib/libimgui.a"
+        INTERFACE_INCLUDE_DIRECTORIES "${VCPKG_INSTALLED_DIR}/include"
+)
+
+# Подключаем ImGui-SFML вручную
+add_library(ImGui-SFML::ImGui-SFML STATIC IMPORTED GLOBAL)
+set_target_properties(ImGui-SFML::ImGui-SFML PROPERTIES
+        IMPORTED_LOCATION "${VCPKG_INSTALLED_DIR}/lib/libImGui-SFML.a"
+        INTERFACE_INCLUDE_DIRECTORIES "${VCPKG_INSTALLED_DIR}/include"
+        INTERFACE_LINK_LIBRARIES "imgui::imgui;SFML::Graphics;SFML::Window;SFML::System"
+)
+
 # Связываем с SFML и необходимыми системными библиотеками
 target_link_libraries(Diploma PRIVATE
         SFML::Graphics
         SFML::Window
         SFML::System
+        imgui::imgui
+        ImGui-SFML::ImGui-SFML
+        nlohmann_json::nlohmann_json
         opengl32
         gdi32
         winmm

@@ -52,23 +52,65 @@ build cmake_object_order_depends_target_Diploma: phony || CMakeFiles/Diploma.dir
 build CMakeFiles/Diploma.dir/main.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/main.cpp || cmake_object_order_depends_target_Diploma
   DEP_FILE = CMakeFiles\Diploma.dir\main.cpp.obj.d
   FLAGS = -g -std=c++20 -fdiagnostics-color=always
-  INCLUDES = -IQ:/Diploma/src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
   OBJECT_DIR = CMakeFiles\Diploma.dir
   OBJECT_FILE_DIR = CMakeFiles\Diploma.dir
 
 build CMakeFiles/Diploma.dir/algorithms/graph/GridGraphBuilder.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/algorithms/graph/GridGraphBuilder.cpp || cmake_object_order_depends_target_Diploma
   DEP_FILE = CMakeFiles\Diploma.dir\algorithms\graph\GridGraphBuilder.cpp.obj.d
   FLAGS = -g -std=c++20 -fdiagnostics-color=always
-  INCLUDES = -IQ:/Diploma/src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  OBJECT_DIR = CMakeFiles\Diploma.dir
+  OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\algorithms\graph
+
+build CMakeFiles/Diploma.dir/algorithms/graph/VisibilityGraphBuilder.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/algorithms/graph/VisibilityGraphBuilder.cpp || cmake_object_order_depends_target_Diploma
+  DEP_FILE = CMakeFiles\Diploma.dir\algorithms\graph\VisibilityGraphBuilder.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
   OBJECT_DIR = CMakeFiles\Diploma.dir
   OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\algorithms\graph
 
 build CMakeFiles/Diploma.dir/visualization/SceneVisualizer.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/visualization/SceneVisualizer.cpp || cmake_object_order_depends_target_Diploma
   DEP_FILE = CMakeFiles\Diploma.dir\visualization\SceneVisualizer.cpp.obj.d
   FLAGS = -g -std=c++20 -fdiagnostics-color=always
-  INCLUDES = -IQ:/Diploma/src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
   OBJECT_DIR = CMakeFiles\Diploma.dir
   OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\visualization
+
+build CMakeFiles/Diploma.dir/visualization/SceneRenderer.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/visualization/SceneRenderer.cpp || cmake_object_order_depends_target_Diploma
+  DEP_FILE = CMakeFiles\Diploma.dir\visualization\SceneRenderer.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  OBJECT_DIR = CMakeFiles\Diploma.dir
+  OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\visualization
+
+build CMakeFiles/Diploma.dir/visualization/GraphRenderer.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/visualization/GraphRenderer.cpp || cmake_object_order_depends_target_Diploma
+  DEP_FILE = CMakeFiles\Diploma.dir\visualization\GraphRenderer.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  OBJECT_DIR = CMakeFiles\Diploma.dir
+  OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\visualization
+
+build CMakeFiles/Diploma.dir/visualization/UIManager.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/visualization/UIManager.cpp || cmake_object_order_depends_target_Diploma
+  DEP_FILE = CMakeFiles\Diploma.dir\visualization\UIManager.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  OBJECT_DIR = CMakeFiles\Diploma.dir
+  OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\visualization
+
+build CMakeFiles/Diploma.dir/visualization/CameraController.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/visualization/CameraController.cpp || cmake_object_order_depends_target_Diploma
+  DEP_FILE = CMakeFiles\Diploma.dir\visualization\CameraController.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  OBJECT_DIR = CMakeFiles\Diploma.dir
+  OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\visualization
+
+build CMakeFiles/Diploma.dir/serialization/SceneSerializer.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/serialization/SceneSerializer.cpp || cmake_object_order_depends_target_Diploma
+  DEP_FILE = CMakeFiles\Diploma.dir\serialization\SceneSerializer.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  OBJECT_DIR = CMakeFiles\Diploma.dir
+  OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\serialization
 
 
 # =============================================================================
@@ -78,9 +120,9 @@ build CMakeFiles/Diploma.dir/visualization/SceneVisualizer.cpp.obj: CXX_COMPILER
 #############################################
 # Link the executable Diploma.exe
 
-build Diploma.exe: CXX_EXECUTABLE_LINKER__Diploma_Debug CMakeFiles/Diploma.dir/main.cpp.obj CMakeFiles/Diploma.dir/algorithms/graph/GridGraphBuilder.cpp.obj CMakeFiles/Diploma.dir/visualization/SceneVisualizer.cpp.obj | Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-graphics.a Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-window.a Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-system.a
+build Diploma.exe: CXX_EXECUTABLE_LINKER__Diploma_Debug CMakeFiles/Diploma.dir/main.cpp.obj CMakeFiles/Diploma.dir/algorithms/graph/GridGraphBuilder.cpp.obj CMakeFiles/Diploma.dir/algorithms/graph/VisibilityGraphBuilder.cpp.obj CMakeFiles/Diploma.dir/visualization/SceneVisualizer.cpp.obj CMakeFiles/Diploma.dir/visualization/SceneRenderer.cpp.obj CMakeFiles/Diploma.dir/visualization/GraphRenderer.cpp.obj CMakeFiles/Diploma.dir/visualization/UIManager.cpp.obj CMakeFiles/Diploma.dir/visualization/CameraController.cpp.obj CMakeFiles/Diploma.dir/serialization/SceneSerializer.cpp.obj | Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libimgui.a Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libImGui-SFML.a Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-graphics.a Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-window.a Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-system.a Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libimgui.a
   FLAGS = -g
-  LINK_LIBRARIES = Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-graphics.a  Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-window.a  Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-system.a  -lopengl32  -lgdi32  -lwinmm  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libimgui.a  Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libImGui-SFML.a  -lopengl32  -lgdi32  -lwinmm  Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-graphics.a  Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-window.a  -lopengl32  -lgdi32  -lwinmm  Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-system.a  Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libimgui.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Diploma.dir
   POST_BUILD = C:\WINDOWS\system32\cmd.exe /C "cd /D Q:\Diploma\src\cmake-build-debug && D:\Programms\PowerShell\7\pwsh.exe -noprofile -executionpolicy Bypass -file Q:/Diploma/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary Q:/Diploma/src/cmake-build-debug/Diploma.exe -installedDir Q:/Diploma/vcpkg/installed/x64-windows/debug/bin -OutVariable out && cd /D Q:\Diploma\src\cmake-build-debug && "Q:\Programms\CLion 2024.1.6\bin\cmake\win\x64\bin\cmake.exe" -E copy_if_different Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/bin/sfml-system-3.dll Q:/Diploma/src/cmake-build-debug && "Q:\Programms\CLion 2024.1.6\bin\cmake\win\x64\bin\cmake.exe" -E copy_if_different Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/bin/sfml-window-3.dll Q:/Diploma/src/cmake-build-debug && "Q:\Programms\CLion 2024.1.6\bin\cmake\win\x64\bin\cmake.exe" -E copy_if_different Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/bin/sfml-graphics-3.dll Q:/Diploma/src/cmake-build-debug"
   PRE_LINK = cd .
@@ -112,6 +154,34 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# Q:/Diploma/src/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for edit_cache
+
+build _deps/json-build/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D Q:\Diploma\src\cmake-build-debug\_deps\json-build && "Q:\Programms\CLion 2024.1.6\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build _deps/json-build/edit_cache: phony _deps/json-build/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build _deps/json-build/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D Q:\Diploma\src\cmake-build-debug\_deps\json-build && "Q:\Programms\CLion 2024.1.6\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SQ:\Diploma\src -BQ:\Diploma\src\cmake-build-debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build _deps/json-build/rebuild_cache: phony _deps/json-build/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
 # Target aliases.
 
 build Diploma: phony Diploma.exe
@@ -124,7 +194,14 @@ build Diploma: phony Diploma.exe
 #############################################
 # Folder: Q:/Diploma/src/cmake-build-debug
 
-build all: phony Diploma.exe
+build all: phony Diploma.exe _deps/json-build/all
+
+# =============================================================================
+
+#############################################
+# Folder: Q:/Diploma/src/cmake-build-debug/_deps/json-build
+
+build _deps/json-build/all: phony
 
 # =============================================================================
 # Built-in targets
@@ -133,14 +210,14 @@ build all: phony Diploma.exe
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | CMakeCache.txt CMakeFiles/3.28.6/CMakeCXXCompiler.cmake CMakeFiles/3.28.6/CMakeRCCompiler.cmake CMakeFiles/3.28.6/CMakeSystem.cmake Q$:/Diploma/src/CMakeLists.txt Q$:/Diploma/vcpkg/scripts/buildsystems/vcpkg.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDependentOption.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeRCInformation.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX-ABI.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-Initialize.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-windres.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/WindowsPaths.cmake
+build build.ninja: RERUN_CMAKE | CMakeCache.txt CMakeFiles/3.28.6/CMakeCXXCompiler.cmake CMakeFiles/3.28.6/CMakeRCCompiler.cmake CMakeFiles/3.28.6/CMakeSystem.cmake Q$:/Diploma/src/CMakeLists.txt Q$:/Diploma/vcpkg/scripts/buildsystems/vcpkg.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDependentOption.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakePackageConfigHelpers.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeRCInformation.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/ExternalProject.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/ExternalProject/shared_internal_commands.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/FetchContent.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/FetchContent/CMakeLists.cmake.in Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/FindGit.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/FindPackageMessage.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/GNUInstallDirs.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX-ABI.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-Initialize.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-windres.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/WindowsPaths.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/WriteBasicConfigVersionFile.cmake _deps/json-src/CMakeLists.txt _deps/json-src/cmake/config.cmake.in _deps/json-src/cmake/nlohmann_jsonConfigVersion.cmake.in _deps/json-src/cmake/pkg-config.pc.in
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build CMakeCache.txt CMakeFiles/3.28.6/CMakeCXXCompiler.cmake CMakeFiles/3.28.6/CMakeRCCompiler.cmake CMakeFiles/3.28.6/CMakeSystem.cmake Q$:/Diploma/src/CMakeLists.txt Q$:/Diploma/vcpkg/scripts/buildsystems/vcpkg.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDependentOption.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeRCInformation.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX-ABI.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-Initialize.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-windres.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/WindowsPaths.cmake: phony
+build CMakeCache.txt CMakeFiles/3.28.6/CMakeCXXCompiler.cmake CMakeFiles/3.28.6/CMakeRCCompiler.cmake CMakeFiles/3.28.6/CMakeSystem.cmake Q$:/Diploma/src/CMakeLists.txt Q$:/Diploma/vcpkg/scripts/buildsystems/vcpkg.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDependentOption.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakePackageConfigHelpers.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeRCInformation.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/ExternalProject.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/ExternalProject/shared_internal_commands.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/FetchContent.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/FetchContent/CMakeLists.cmake.in Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/FindGit.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/FindPackageMessage.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/GNUInstallDirs.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX-ABI.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-Initialize.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-windres.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/WindowsPaths.cmake Q$:/Programms/CLion$ 2024.1.6/bin/cmake/win/x64/share/cmake-3.28/Modules/WriteBasicConfigVersionFile.cmake _deps/json-src/CMakeLists.txt _deps/json-src/cmake/config.cmake.in _deps/json-src/cmake/nlohmann_jsonConfigVersion.cmake.in _deps/json-src/cmake/pkg-config.pc.in: phony
 
 
 #############################################

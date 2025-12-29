@@ -3,6 +3,7 @@
 
 #include "../geometry/Scene.h"
 #include "Graph.h"
+#include <string>
 
 namespace algorithms::graph {
 
@@ -10,8 +11,8 @@ namespace algorithms::graph {
     public:
         virtual ~GraphBuilder() = default;
 
-        [[nodiscard]] virtual Graph build(const geometry::Scene& scene) const = 0;
-        [[nodiscard]] virtual std::string name() const;
+        [[nodiscard]] virtual Graph build(const geometry::Scene& scene) = 0;
+        [[nodiscard]] virtual std::string name() const = 0;
     };
 
 }

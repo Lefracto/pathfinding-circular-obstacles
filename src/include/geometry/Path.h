@@ -22,7 +22,7 @@ namespace geometry {
 
         //explicit Path(std::vector<Point> pts) : points(std::move(pts)) {}
         //[[nodiscard]] bool is_valid(const Scene& scene) const;
-    };
+    }; 
 
 }
 
