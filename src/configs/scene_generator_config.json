@@ -1,0 +1,130 @@
+{
+    "version": 1,
+    "name": "exp_core_generation_demo",
+    "instance_count": 25,
+    "global_seed": 42042,
+    "scene": {
+        "width": 120.0,
+        "height": 120.0
+    },
+    "obstacles": {
+        "count_distribution": {
+            "type": "discrete_int",
+            "values": [20, 30, 40, 50],
+            "weights": [0.2, 0.4, 0.3, 0.1]
+        },
+        "radius_distribution": {
+            "type": "uniform_real",
+            "min": 1.5,
+            "max": 8.0
+        },
+        "center_distribution": {
+            "x": {
+                "type": "normal",
+                "mean": 60.0,
+                "stddev": 32.0,
+                "clamp_min": -20.0,
+                "clamp_max": 140.0
+            },
+            "y": {
+                "type": "normal",
+                "mean": 60.0,
+                "stddev": 32.0,
+                "clamp_min": -20.0,
+                "clamp_max": 140.0
+            }
+        },
+        "allow_overlap": true,
+        "require_intersection_with_scene": true,
+        "max_attempts_per_obstacle": 150
+    },
+    "start_goal": {
+        "start": {
+            "mode": "random_free",
+            "distribution": {
+                "x": {
+                    "type": "uniform_real",
+                    "min": 0.0,
+                    "max": 120.0
+                },
+                "y": {
+                    "type": "uniform_real",
+                    "min": 0.0,
+                    "max": 120.0
+                }
+            }
+        },
+        "goal": {
+            "mode": "random_free"
+        },
+        "min_distance": 35.0,
+        "max_attempts": 3000
+    },
+    "algorithms": [
+        {
+            "id": "rrt",
+            "enabled": true,
+            "params": {
+                "max_iterations": 4000,
+                "step_size": 2.5
+            }
+        },
+        {
+            "id": "grid_dijkstra",
+            "enabled": true,
+            "params": {
+                "grid_step": 4.0,
+                "allow_diagonal": true
+            }
+        },
+        {
+            "id": "grid_astar",
+            "enabled": true,
+            "params": {
+                "grid_step": 4.0,
+                "allow_diagonal": true
+            }
+        },
+        {
+            "id": "visibility_dijkstra",
+            "enabled": true,
+            "params": {
+                "points_per_obstacle": 12
+            }
+        },
+        {
+            "id": "visibility_astar",
+            "enabled": true,
+            "params": {
+                "points_per_obstacle": 12
+            }
+        }
+    ],
+    "metrics": {
+        "auto_compute_on_generation": false,
+        "execution_mode": "parallel",
+        "worker_threads": 0,
+        "compute_obstacle_area_ratio": true,
+        "compute_boundary_density": true,
+        "compute_cell_density_cv": true,
+        "compute_radii_cv": true,
+        "compute_clearance": true,
+        "compute_largest_component_ratio": true,
+        "obstacle_area_ratio_method": "monte_carlo",
+        "obstacle_area_samples": 20000,
+        "obstacle_area_grid_resolution": 250,
+        "boundary_angle_samples": 360,
+        "cell_grid_x": 10,
+        "cell_grid_y": 10,
+        "cell_density_samples": 12000,
+        "clearance_grid_x": 140,
+        "clearance_grid_y": 140,
+        "clearance_quantile": 0.1,
+        "clearance_region_mode": "start_goal_or_largest",
+        "connectivity_grid_x": 140,
+        "connectivity_grid_y": 140
+    },
+    "output": {
+        "save_debug_structures": false
+    }
+}

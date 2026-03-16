@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "name": "final25_huge_square_boulder_dense_grade",
+  "instance_count": 800,
+  "global_seed": 92646,
+  "scene": {
+    "width": 620.0,
+    "height": 620.0
+  },
+  "obstacles": {
+    "count_distribution": {
+      "min": 108,
+      "max": 136,
+      "type": "uniform_int"
+    },
+    "radius_distribution": {
+      "stddev": 7.2,
+      "mean": 17.0,
+      "clamp_min": 6.5,
+      "type": "normal",
+      "clamp_max": 32.0
+    },
+    "center_distribution": {
+      "x": {
+        "min": 0.0,
+        "max": 620.0,
+        "type": "uniform_real"
+      },
+      "y": {
+        "min": 0.0,
+        "max": 620.0,
+        "type": "uniform_real"
+      }
+    },
+    "allow_overlap": true,
+    "require_intersection_with_scene": true,
+    "max_attempts_per_obstacle": 5400
+  },
+  "start_goal": {
+    "start": {
+      "mode": "random_free",
+      "distribution": {
+        "x": {
+          "min": 30.0,
+          "max": 92.0,
+          "type": "uniform_real"
+        },
+        "y": {
+          "min": 30.0,
+          "max": 92.0,
+          "type": "uniform_real"
+        }
+      }
+    },
+    "goal": {
+      "mode": "random_free",
+      "distribution": {
+        "x": {
+          "min": 528.0,
+          "max": 590.0,
+          "type": "uniform_real"
+        },
+        "y": {
+          "min": 528.0,
+          "max": 590.0,
+          "type": "uniform_real"
+        }
+      }
+    },
+    "min_distance": 420.0,
+    "max_attempts": 42000
+  },
+  "algorithms": [
+    {
+      "id": "rrt",
+      "enabled": true,
+      "params": {
+        "max_iterations": 10000,
+        "step_size": 2.5,
+        "goal_sample_rate": 0.08,
+        "goal_tolerance": 2.5,
+        "enable_path_smoothing": true,
+        "smoothing_iterations": 120
+      }
+    },
+    {
+      "id": "grid_dijkstra",
+      "enabled": true,
+      "params": {
+        "grid_step": 3.5,
+        "allow_diagonal": true
+      }
+    },
+    {
+      "id": "grid_astar",
+      "enabled": true,
+      "params": {
+        "grid_step": 3.5,
+        "allow_diagonal": true
+      }
+    },
+    {
+      "id": "visibility_dijkstra",
+      "enabled": true,
+      "params": {
+        "points_per_obstacle": 16
+      }
+    },
+    {
+      "id": "visibility_astar",
+      "enabled": true,
+      "params": {
+        "points_per_obstacle": 16
+      }
+    }
+  ],
+  "metrics": {
+    "auto_compute_on_generation": false,
+    "execution_mode": "parallel",
+    "worker_threads": 0,
+    "compute_obstacle_area_ratio": true,
+    "compute_boundary_density": true,
+    "compute_cell_density_cv": true,
+    "compute_radii_cv": true,
+    "compute_clearance": true,
+    "compute_largest_component_ratio": true,
+    "obstacle_area_ratio_method": "monte_carlo",
+    "obstacle_area_samples": 10000,
+    "obstacle_area_grid_resolution": 180,
+    "boundary_angle_samples": 240,
+    "cell_grid_x": 12,
+    "cell_grid_y": 12,
+    "cell_density_samples": 7000,
+    "clearance_grid_x": 140,
+    "clearance_grid_y": 140,
+    "clearance_quantile": 0.1,
+    "clearance_region_mode": "start_goal_or_largest",
+    "connectivity_grid_x": 140,
+    "connectivity_grid_y": 140
+  },
+  "output": {
+    "save_debug_structures": false
+  }
+}

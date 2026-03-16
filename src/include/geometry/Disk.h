@@ -18,9 +18,6 @@ namespace geometry {
         Disk(Point c, double r, size_t id = 0)
             : center(c), radius(r), id(id) {}
 
-        /**
-         * Check if a point is inside or on the boundary of this disk
-         */
         [[nodiscard]] bool contains(const Point& p) const {
             return center.distance(p) <= radius;
         }

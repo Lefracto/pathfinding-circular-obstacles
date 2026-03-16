@@ -1,15 +1,10 @@
-//
-// Created by USER on 26/12/2025.
-//
-
 #ifndef ALGORITHMS_PLANNER_H
 #define ALGORITHMS_PLANNER_H
 
-#include <string>
-#include <chrono>
 #include <optional>
-#include "../geometry/scene.h"
-#include "../geometry/path.h"
+#include <string>
+#include "../geometry/Path.h"
+#include "../geometry/Scene.h"
 
 namespace algorithms {
 
@@ -19,6 +14,7 @@ namespace algorithms {
         geometry::Path path;
         double runtime_ms = 0.0;
         std::string algorithm_name;
+        std::optional<double> exact_path_length = std::nullopt;
     };
 
     class Planner {

@@ -1,5 +1,5 @@
 "Q:\Programms\CLion 2024.1.6\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=Q:/Programms/CLion 2024.1.6/bin/ninja/win/x64/ninja.exe" -DCMAKE_TOOLCHAIN_FILE=Q:/Diploma/vcpkg/scripts/buildsystems/vcpkg.cmake -G Ninja -S Q:\Diploma\src -B Q:\Diploma\src\cmake-build-debug
 -- Using the multi-header code from Q:/Diploma/src/cmake-build-debug/_deps/json-src/include/
--- Configuring done (0.9s)
+-- Configuring done (1.3s)
 -- Generating done (0.0s)
 -- Build files have been written to: Q:/Diploma/src/cmake-build-debug

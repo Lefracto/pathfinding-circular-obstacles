@@ -70,6 +70,76 @@ build CMakeFiles/Diploma.dir/algorithms/graph/VisibilityGraphBuilder.cpp.obj: CX
   OBJECT_DIR = CMakeFiles\Diploma.dir
   OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\algorithms\graph
 
+build CMakeFiles/Diploma.dir/algorithms/search/GraphSearch.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/algorithms/search/GraphSearch.cpp || cmake_object_order_depends_target_Diploma
+  DEP_FILE = CMakeFiles\Diploma.dir\algorithms\search\GraphSearch.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  OBJECT_DIR = CMakeFiles\Diploma.dir
+  OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\algorithms\search
+
+build CMakeFiles/Diploma.dir/algorithms/planners/GraphBasedPlanners.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/algorithms/planners/GraphBasedPlanners.cpp || cmake_object_order_depends_target_Diploma
+  DEP_FILE = CMakeFiles\Diploma.dir\algorithms\planners\GraphBasedPlanners.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  OBJECT_DIR = CMakeFiles\Diploma.dir
+  OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\algorithms\planners
+
+build CMakeFiles/Diploma.dir/algorithms/planners/RRTPlanner.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/algorithms/planners/RRTPlanner.cpp || cmake_object_order_depends_target_Diploma
+  DEP_FILE = CMakeFiles\Diploma.dir\algorithms\planners\RRTPlanner.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  OBJECT_DIR = CMakeFiles\Diploma.dir
+  OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\algorithms\planners
+
+build CMakeFiles/Diploma.dir/algorithms/planners/PlannerFactory.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/algorithms/planners/PlannerFactory.cpp || cmake_object_order_depends_target_Diploma
+  DEP_FILE = CMakeFiles\Diploma.dir\algorithms\planners\PlannerFactory.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  OBJECT_DIR = CMakeFiles\Diploma.dir
+  OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\algorithms\planners
+
+build CMakeFiles/Diploma.dir/experiment/config/GeneratorConfigIO.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/experiment/config/GeneratorConfigIO.cpp || cmake_object_order_depends_target_Diploma
+  DEP_FILE = CMakeFiles\Diploma.dir\experiment\config\GeneratorConfigIO.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  OBJECT_DIR = CMakeFiles\Diploma.dir
+  OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\experiment\config
+
+build CMakeFiles/Diploma.dir/experiment/generation/SceneBatchGenerator.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/experiment/generation/SceneBatchGenerator.cpp || cmake_object_order_depends_target_Diploma
+  DEP_FILE = CMakeFiles\Diploma.dir\experiment\generation\SceneBatchGenerator.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  OBJECT_DIR = CMakeFiles\Diploma.dir
+  OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\experiment\generation
+
+build CMakeFiles/Diploma.dir/experiment/core/ExperimentService.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/experiment/core/ExperimentService.cpp || cmake_object_order_depends_target_Diploma
+  DEP_FILE = CMakeFiles\Diploma.dir\experiment\core\ExperimentService.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  OBJECT_DIR = CMakeFiles\Diploma.dir
+  OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\experiment\core
+
+build CMakeFiles/Diploma.dir/experiment/core/ExperimentIO.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/experiment/core/ExperimentIO.cpp || cmake_object_order_depends_target_Diploma
+  DEP_FILE = CMakeFiles\Diploma.dir\experiment\core\ExperimentIO.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  OBJECT_DIR = CMakeFiles\Diploma.dir
+  OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\experiment\core
+
+build CMakeFiles/Diploma.dir/experiment/metrics/SceneMetricsCalculator.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/experiment/metrics/SceneMetricsCalculator.cpp || cmake_object_order_depends_target_Diploma
+  DEP_FILE = CMakeFiles\Diploma.dir\experiment\metrics\SceneMetricsCalculator.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  OBJECT_DIR = CMakeFiles\Diploma.dir
+  OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\experiment\metrics
+
+build CMakeFiles/Diploma.dir/experiment/metrics/SceneMetricsBatchCalculator.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/experiment/metrics/SceneMetricsBatchCalculator.cpp || cmake_object_order_depends_target_Diploma
+  DEP_FILE = CMakeFiles\Diploma.dir\experiment\metrics\SceneMetricsBatchCalculator.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  INCLUDES = -IQ:/Diploma/src/include -IQ:/Diploma/src/cmake-build-debug/_deps/json-src/include -isystem Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/include
+  OBJECT_DIR = CMakeFiles\Diploma.dir
+  OBJECT_FILE_DIR = CMakeFiles\Diploma.dir\experiment\metrics
+
 build CMakeFiles/Diploma.dir/visualization/SceneVisualizer.cpp.obj: CXX_COMPILER__Diploma_unscanned_Debug Q$:/Diploma/src/visualization/SceneVisualizer.cpp || cmake_object_order_depends_target_Diploma
   DEP_FILE = CMakeFiles\Diploma.dir\visualization\SceneVisualizer.cpp.obj.d
   FLAGS = -g -std=c++20 -fdiagnostics-color=always
@@ -120,9 +190,9 @@ build CMakeFiles/Diploma.dir/serialization/SceneSerializer.cpp.obj: CXX_COMPILER
 #############################################
 # Link the executable Diploma.exe
 
-build Diploma.exe: CXX_EXECUTABLE_LINKER__Diploma_Debug CMakeFiles/Diploma.dir/main.cpp.obj CMakeFiles/Diploma.dir/algorithms/graph/GridGraphBuilder.cpp.obj CMakeFiles/Diploma.dir/algorithms/graph/VisibilityGraphBuilder.cpp.obj CMakeFiles/Diploma.dir/visualization/SceneVisualizer.cpp.obj CMakeFiles/Diploma.dir/visualization/SceneRenderer.cpp.obj CMakeFiles/Diploma.dir/visualization/GraphRenderer.cpp.obj CMakeFiles/Diploma.dir/visualization/UIManager.cpp.obj CMakeFiles/Diploma.dir/visualization/CameraController.cpp.obj CMakeFiles/Diploma.dir/serialization/SceneSerializer.cpp.obj | Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libimgui.a Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libImGui-SFML.a Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-graphics.a Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-window.a Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-system.a Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libimgui.a
+build Diploma.exe: CXX_EXECUTABLE_LINKER__Diploma_Debug CMakeFiles/Diploma.dir/main.cpp.obj CMakeFiles/Diploma.dir/algorithms/graph/GridGraphBuilder.cpp.obj CMakeFiles/Diploma.dir/algorithms/graph/VisibilityGraphBuilder.cpp.obj CMakeFiles/Diploma.dir/algorithms/search/GraphSearch.cpp.obj CMakeFiles/Diploma.dir/algorithms/planners/GraphBasedPlanners.cpp.obj CMakeFiles/Diploma.dir/algorithms/planners/RRTPlanner.cpp.obj CMakeFiles/Diploma.dir/algorithms/planners/PlannerFactory.cpp.obj CMakeFiles/Diploma.dir/experiment/config/GeneratorConfigIO.cpp.obj CMakeFiles/Diploma.dir/experiment/generation/SceneBatchGenerator.cpp.obj CMakeFiles/Diploma.dir/experiment/core/ExperimentService.cpp.obj CMakeFiles/Diploma.dir/experiment/core/ExperimentIO.cpp.obj CMakeFiles/Diploma.dir/experiment/metrics/SceneMetricsCalculator.cpp.obj CMakeFiles/Diploma.dir/experiment/metrics/SceneMetricsBatchCalculator.cpp.obj CMakeFiles/Diploma.dir/visualization/SceneVisualizer.cpp.obj CMakeFiles/Diploma.dir/visualization/SceneRenderer.cpp.obj CMakeFiles/Diploma.dir/visualization/GraphRenderer.cpp.obj CMakeFiles/Diploma.dir/visualization/UIManager.cpp.obj CMakeFiles/Diploma.dir/visualization/CameraController.cpp.obj CMakeFiles/Diploma.dir/serialization/SceneSerializer.cpp.obj | Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libimgui.a Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libImGui-SFML.a Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-graphics.a Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-window.a Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-system.a Q$:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libimgui.a
   FLAGS = -g
-  LINK_LIBRARIES = Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libimgui.a  Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libImGui-SFML.a  -lopengl32  -lgdi32  -lwinmm  Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-graphics.a  Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-window.a  -lopengl32  -lgdi32  -lwinmm  Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-system.a  Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libimgui.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libimgui.a  Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libImGui-SFML.a  -lopengl32  -lcomdlg32  -lgdi32  -lwinmm  Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-graphics.a  Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-window.a  -lopengl32  Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libsfml-system.a  Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/lib/libimgui.a  -lgdi32  -lwinmm  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Diploma.dir
   POST_BUILD = C:\WINDOWS\system32\cmd.exe /C "cd /D Q:\Diploma\src\cmake-build-debug && D:\Programms\PowerShell\7\pwsh.exe -noprofile -executionpolicy Bypass -file Q:/Diploma/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary Q:/Diploma/src/cmake-build-debug/Diploma.exe -installedDir Q:/Diploma/vcpkg/installed/x64-windows/debug/bin -OutVariable out && cd /D Q:\Diploma\src\cmake-build-debug && "Q:\Programms\CLion 2024.1.6\bin\cmake\win\x64\bin\cmake.exe" -E copy_if_different Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/bin/sfml-system-3.dll Q:/Diploma/src/cmake-build-debug && "Q:\Programms\CLion 2024.1.6\bin\cmake\win\x64\bin\cmake.exe" -E copy_if_different Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/bin/sfml-window-3.dll Q:/Diploma/src/cmake-build-debug && "Q:\Programms\CLion 2024.1.6\bin\cmake\win\x64\bin\cmake.exe" -E copy_if_different Q:/Diploma/vcpkg/installed/x64-mingw-dynamic/bin/sfml-graphics-3.dll Q:/Diploma/src/cmake-build-debug"
   PRE_LINK = cd .

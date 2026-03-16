@@ -1,7 +1,3 @@
-//
-// Created by USER on 26/12/2025.
-//
-
 #ifndef GEOMETRY_SCENE_H
 #define GEOMETRY_SCENE_H
 
