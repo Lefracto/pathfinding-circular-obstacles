@@ -13,6 +13,7 @@ import pandas as pd
 EXPERIMENT_FILE_PATTERN = re.compile(r"exp_config_(\d+)_experiment\.json$", re.IGNORECASE)
 SCENE_ID_PATTERN = re.compile(r"scene_(\d+)$", re.IGNORECASE)
 SCENE_METRIC_PREFIX = "scene_metric_"
+DATASET_NAMES = ("runs", "runs_analysis", "scenes", "files")
 
 
 @dataclass
@@ -508,6 +509,137 @@ def build_experiment_dataset(experiments_dir: str | Path) -> ExperimentDatasetBu
     )
 
 
+def _dataset_cache_candidates(output_dir: Path, prefix: str, dataset_name: str) -> tuple[Path, Path]:
+    parquet_path = output_dir / f"{prefix}_{dataset_name}.parquet"
+    csv_path = output_dir / f"{prefix}_{dataset_name}.csv.gz"
+    return parquet_path, csv_path
+
+
+def get_dataset_bundle_paths(
+    output_dir: str | Path,
+    prefix: str = "experiment_runs",
+) -> dict[str, Path]:
+    output_dir = Path(output_dir)
+
+    saved_paths: dict[str, Path] = {}
+    missing_entries: list[str] = []
+
+    for dataset_name in DATASET_NAMES:
+        parquet_path, csv_path = _dataset_cache_candidates(output_dir, prefix, dataset_name)
+        if parquet_path.exists():
+            saved_paths[dataset_name] = parquet_path
+        elif csv_path.exists():
+            saved_paths[dataset_name] = csv_path
+        else:
+            missing_entries.append(dataset_name)
+
+    summary_path = output_dir / f"{prefix}_summary.json"
+    if summary_path.exists():
+        saved_paths["summary"] = summary_path
+    else:
+        missing_entries.append("summary")
+
+    if missing_entries:
+        missing_text = ", ".join(missing_entries)
+        raise FileNotFoundError(
+            f"Missing cached dataset files for prefix '{prefix}' in '{output_dir}': {missing_text}"
+        )
+
+    return saved_paths
+
+
+def _read_saved_dataframe(path: Path) -> pd.DataFrame:
+    if str(path).endswith(".parquet"):
+        return pd.read_parquet(path)
+    return pd.read_csv(path)
+
+
+def load_dataset_bundle(
+    output_dir: str | Path,
+    prefix: str = "experiment_runs",
+) -> ExperimentDatasetBundle:
+    saved_paths = get_dataset_bundle_paths(output_dir, prefix=prefix)
+
+    with saved_paths["summary"].open("r", encoding="utf-8") as fp:
+        summary = json.load(fp)
+
+    return ExperimentDatasetBundle(
+        run_df=_read_saved_dataframe(saved_paths["runs"]),
+        analysis_run_df=_read_saved_dataframe(saved_paths["runs_analysis"]),
+        scene_df=_read_saved_dataframe(saved_paths["scenes"]),
+        file_df=_read_saved_dataframe(saved_paths["files"]),
+        summary=summary,
+    )
+
+
+def get_dataset_cache_info(
+    experiments_dir: str | Path,
+    output_dir: str | Path,
+    prefix: str = "experiment_runs",
+    dependency_paths: list[str | Path] | None = None,
+) -> dict[str, Any]:
+    experiments_dir = Path(experiments_dir)
+    experiment_paths = sorted(experiments_dir.glob("*_experiment.json"))
+
+    if not experiment_paths:
+        raise FileNotFoundError(f"No '*_experiment.json' files found in: {experiments_dir}")
+
+    try:
+        saved_paths = get_dataset_bundle_paths(output_dir, prefix=prefix)
+    except FileNotFoundError as exc:
+        return {
+            "cache_available": False,
+            "is_fresh": False,
+            "reason": str(exc),
+            "saved_paths": {},
+        }
+
+    freshness_inputs = [*experiment_paths, Path(__file__)]
+    if dependency_paths:
+        freshness_inputs.extend(Path(path) for path in dependency_paths)
+    freshness_inputs = [path for path in freshness_inputs if path.exists()]
+
+    latest_source_mtime = max(path.stat().st_mtime for path in freshness_inputs)
+    oldest_cache_mtime = min(path.stat().st_mtime for path in saved_paths.values())
+    is_fresh = oldest_cache_mtime >= latest_source_mtime
+
+    return {
+        "cache_available": True,
+        "is_fresh": is_fresh,
+        "reason": "" if is_fresh else "Cache is older than source experiments or parser code.",
+        "saved_paths": {name: str(path) for name, path in saved_paths.items()},
+        "latest_source_mtime": latest_source_mtime,
+        "oldest_cache_mtime": oldest_cache_mtime,
+    }
+
+
+def load_or_build_experiment_dataset(
+    experiments_dir: str | Path,
+    output_dir: str | Path,
+    prefix: str = "experiment_runs",
+    force_rebuild: bool = False,
+) -> tuple[ExperimentDatasetBundle, dict[str, Any]]:
+    cache_info = get_dataset_cache_info(experiments_dir, output_dir, prefix=prefix)
+
+    if cache_info["cache_available"] and cache_info["is_fresh"] and not force_rebuild:
+        bundle = load_dataset_bundle(output_dir, prefix=prefix)
+        return bundle, {
+            **cache_info,
+            "mode": "cache",
+        }
+
+    bundle = build_experiment_dataset(experiments_dir)
+    saved_paths = save_dataset_bundle(bundle, output_dir, prefix=prefix)
+    refreshed_cache_info = get_dataset_cache_info(experiments_dir, output_dir, prefix=prefix)
+
+    rebuild_mode = "forced_rebuild" if force_rebuild else "rebuilt"
+    return bundle, {
+        **refreshed_cache_info,
+        "mode": rebuild_mode,
+        "saved_paths": saved_paths,
+    }
+
+
 def save_dataset_bundle(
     bundle: ExperimentDatasetBundle,
     output_dir: str | Path,
@@ -523,8 +655,7 @@ def save_dataset_bundle(
         ("scenes", bundle.scene_df),
         ("files", bundle.file_df),
     ):
-        parquet_path = output_dir / f"{prefix}_{dataset_name}.parquet"
-        csv_path = output_dir / f"{prefix}_{dataset_name}.csv.gz"
+        parquet_path, csv_path = _dataset_cache_candidates(output_dir, prefix, dataset_name)
 
         try:
             dataframe.to_parquet(parquet_path, index=False)

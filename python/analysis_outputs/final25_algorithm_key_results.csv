@@ -1,0 +1,5 @@
+criterion,algorithm_id,value,algorithm_label
+best_success_rate,visibility_astar,0.9735219784113187,Visibility A*
+weakest_success_rate,rrt,0.9267071356024281,RRT
+fastest_successful_runtime,rrt,15.8554,RRT
+best_median_path_quality,visibility_astar,1.0079297674785987,Visibility A*

@@ -1,0 +1,11 @@
+metric_a_label,metric_b_label,spearman,abs_spearman,strength_category
+boundary density,clearance,-0.8712635550673596,0.8712635550673596,strong
+cell density CV,obstacle area ratio,-0.8436365191023956,0.8436365191023956,strong
+largest component ratio,obstacle area ratio,-0.8198166257596501,0.8198166257596501,strong
+boundary density,obstacle area ratio,0.7641982002383924,0.7641982002383924,strong
+cell density CV,largest component ratio,0.6930785842148103,0.6930785842148103,moderate
+boundary density,largest component ratio,-0.5968608231282767,0.5968608231282767,moderate
+clearance,obstacle area ratio,-0.5713935726970369,0.5713935726970369,moderate
+boundary density,cell density CV,-0.5467898507203195,0.5467898507203195,moderate
+cell density CV,clearance,0.4351315122184002,0.4351315122184002,weak-to-moderate
+clearance,largest component ratio,0.3683796908100899,0.3683796908100899,weak-to-moderate

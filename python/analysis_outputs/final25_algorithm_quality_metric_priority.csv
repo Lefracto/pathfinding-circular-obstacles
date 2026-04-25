@@ -1,0 +1,7 @@
+metric,max_abs_quality_spearman,max_abs_delta_relative_path_length,metric_label
+scene_metric_obstacle_area_ratio,0.813448388889663,0.18387144709991987,obstacle area ratio
+scene_metric_largest_component_ratio,0.7135485131762824,0.16779018233843446,largest component ratio
+scene_metric_boundary_density,0.6960986959344836,0.18384503316659262,boundary density
+scene_metric_cell_density_cv,0.5525432060515829,0.129604144520592,cell density CV
+scene_metric_clearance,0.43412543830425615,0.09040843140818833,clearance
+scene_metric_radii_cv,0.09468219318045665,0.006348481070236556,radii CV

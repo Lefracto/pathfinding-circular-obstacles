@@ -1,0 +1,14 @@
+{
+  "experiment_file_count": 53,
+  "run_row_count": 212000,
+  "analysis_run_row_count": 212000,
+  "scene_row_count": 42400,
+  "theoretical_max_run_rows": 212000,
+  "actual_run_rows": 212000,
+  "executed_run_count": 211685,
+  "not_run_count": 315,
+  "generated_scene_count": 42337,
+  "completed_scene_count": 42337,
+  "path_found_run_count": 202284,
+  "failed_run_count": 0
+}

@@ -1,0 +1,16 @@
+metric_a,metric_a_label,metric_b,metric_b_label,pair_label,pearson,spearman,abs_pearson,abs_spearman,strength_category
+scene_metric_boundary_density,boundary density,scene_metric_clearance,clearance,boundary density - clearance,-0.6111333568828624,-0.8712635550673596,0.6111333568828624,0.8712635550673596,strong
+scene_metric_cell_density_cv,cell density CV,scene_metric_obstacle_area_ratio,obstacle area ratio,cell density CV - obstacle area ratio,-0.811613960660896,-0.8436365191023956,0.811613960660896,0.8436365191023956,strong
+scene_metric_largest_component_ratio,largest component ratio,scene_metric_obstacle_area_ratio,obstacle area ratio,largest component ratio - obstacle area ratio,-0.40583523640573244,-0.8198166257596501,0.40583523640573244,0.8198166257596501,strong
+scene_metric_boundary_density,boundary density,scene_metric_obstacle_area_ratio,obstacle area ratio,boundary density - obstacle area ratio,0.7391546075685231,0.7641982002383924,0.7391546075685231,0.7641982002383924,strong
+scene_metric_cell_density_cv,cell density CV,scene_metric_largest_component_ratio,largest component ratio,cell density CV - largest component ratio,0.22120882009959128,0.6930785842148103,0.22120882009959128,0.6930785842148103,moderate
+scene_metric_boundary_density,boundary density,scene_metric_largest_component_ratio,largest component ratio,boundary density - largest component ratio,-0.42174821271723684,-0.5968608231282767,0.42174821271723684,0.5968608231282767,moderate
+scene_metric_clearance,clearance,scene_metric_obstacle_area_ratio,obstacle area ratio,clearance - obstacle area ratio,-0.49548888834179305,-0.5713935726970369,0.49548888834179305,0.5713935726970369,moderate
+scene_metric_boundary_density,boundary density,scene_metric_cell_density_cv,cell density CV,boundary density - cell density CV,-0.45715369383989324,-0.5467898507203195,0.45715369383989324,0.5467898507203195,moderate
+scene_metric_cell_density_cv,cell density CV,scene_metric_clearance,clearance,cell density CV - clearance,0.384058198729092,0.4351315122184002,0.384058198729092,0.4351315122184002,weak-to-moderate
+scene_metric_clearance,clearance,scene_metric_largest_component_ratio,largest component ratio,clearance - largest component ratio,0.15994556961771791,0.3683796908100899,0.15994556961771791,0.3683796908100899,weak-to-moderate
+scene_metric_clearance,clearance,scene_metric_radii_cv,radii CV,clearance - radii CV,0.2839169184538475,0.330115987921335,0.2839169184538475,0.330115987921335,weak-to-moderate
+scene_metric_boundary_density,boundary density,scene_metric_radii_cv,radii CV,boundary density - radii CV,-0.12633476315235406,-0.25447243017307764,0.12633476315235406,0.25447243017307764,weak
+scene_metric_cell_density_cv,cell density CV,scene_metric_radii_cv,radii CV,cell density CV - radii CV,-0.23000872870631345,-0.16520567704267927,0.23000872870631345,0.16520567704267927,weak
+scene_metric_obstacle_area_ratio,obstacle area ratio,scene_metric_radii_cv,radii CV,obstacle area ratio - radii CV,0.07206374977536098,0.042254812850241186,0.07206374977536098,0.042254812850241186,weak
+scene_metric_largest_component_ratio,largest component ratio,scene_metric_radii_cv,radii CV,largest component ratio - radii CV,0.04256109897873151,-0.005635609764556903,0.04256109897873151,0.005635609764556903,weak

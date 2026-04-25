@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "name": "final25_medium_center_cluster_hard_varied",
+  "name": "exp_config_08",
   "instance_count": 800,
   "global_seed": 92508,
   "scene": {

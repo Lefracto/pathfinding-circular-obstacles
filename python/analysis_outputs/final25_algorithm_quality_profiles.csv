@@ -1,0 +1,86 @@
+metric_quantile_rank,metric_value,median_relative_path_length,q25_relative_path_length,q75_relative_path_length,sample_count,algorithm_id,algorithm_label,metric,metric_label,quantile_count
+1,0.0457,1.0285634154085428,1.0141427680564763,1.0447337932621645,6722,grid_astar,Grid A*,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+2,0.0731,1.029450073870244,1.018239580003582,1.0511845468882222,6718,grid_astar,Grid A*,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+3,0.1179,1.0645746522180868,1.0406870970737627,1.078729190090611,6717,grid_astar,Grid A*,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+4,0.1904,1.0771865583896283,1.0537910363829561,1.129114575768994,6718,grid_astar,Grid A*,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+5,0.3119,1.1044918255010938,1.0744567285505637,1.2220351474132536,6716,grid_astar,Grid A*,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+6,0.4123,1.1310395769195445,1.0874160826093013,1.2446553926815591,6718,grid_astar,Grid A*,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+1,0.990453790813503,1.1387153695582881,1.0884655570936903,1.2440266731903018,6719,grid_astar,Grid A*,scene_metric_largest_component_ratio,largest component ratio,5
+2,0.9984949031949101,1.0855036719188234,1.0623108849764973,1.138494165678591,6719,grid_astar,Grid A*,scene_metric_largest_component_ratio,largest component ratio,5
+3,0.99958909738392,1.077479197289965,1.0551367215794556,1.1121953099228625,6717,grid_astar,Grid A*,scene_metric_largest_component_ratio,largest component ratio,5
+4,0.9998930338279755,1.0611897873063665,1.0334902815356908,1.0791097191400945,6718,grid_astar,Grid A*,scene_metric_largest_component_ratio,largest component ratio,5
+5,1.0,1.0311969815729465,1.0172753973225044,1.0553159856137315,13436,grid_astar,Grid A*,scene_metric_largest_component_ratio,largest component ratio,5
+1,0.0087690709894968,1.022465039467138,1.0138626061485323,1.0327771570233466,6719,grid_astar,Grid A*,scene_metric_boundary_density,boundary density,6
+2,0.02140386073275897,1.0602022199550611,1.0355779597856936,1.0760247658918014,6718,grid_astar,Grid A*,scene_metric_boundary_density,boundary density,6
+3,0.032016844321449515,1.061371181460771,1.0412592935145808,1.0793993993736073,6718,grid_astar,Grid A*,scene_metric_boundary_density,boundary density,6
+4,0.04177205052135692,1.070433723601485,1.0449936730999023,1.0928647754691083,6718,grid_astar,Grid A*,scene_metric_boundary_density,boundary density,6
+5,0.06158356248522758,1.0943008264591745,1.0720962806611696,1.1568456095220803,6718,grid_astar,Grid A*,scene_metric_boundary_density,boundary density,6
+6,0.10876222671397077,1.201572072613454,1.1096480862453189,1.2968502680798522,6718,grid_astar,Grid A*,scene_metric_boundary_density,boundary density,6
+1,0.0457,1.0285634154085428,1.0141427680564763,1.0447337932621645,6722,grid_dijkstra,Grid Dijkstra,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+2,0.0731,1.029450073870244,1.018239580003582,1.051184546888222,6718,grid_dijkstra,Grid Dijkstra,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+3,0.1179,1.0645746522180868,1.0406870970737627,1.0787291900906113,6717,grid_dijkstra,Grid Dijkstra,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+4,0.1904,1.0771865583896283,1.053791036382956,1.1291145757689942,6718,grid_dijkstra,Grid Dijkstra,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+5,0.3119,1.1044918255010938,1.074456728550564,1.2220351474132536,6716,grid_dijkstra,Grid Dijkstra,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+6,0.4123,1.1310395769195447,1.0874160826093013,1.2446553926815591,6718,grid_dijkstra,Grid Dijkstra,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+1,0.990453790813503,1.1387153695582881,1.08846555709369,1.2440266731903018,6719,grid_dijkstra,Grid Dijkstra,scene_metric_largest_component_ratio,largest component ratio,5
+2,0.9984949031949101,1.0855036719188234,1.0623108849764973,1.138494165678591,6719,grid_dijkstra,Grid Dijkstra,scene_metric_largest_component_ratio,largest component ratio,5
+3,0.99958909738392,1.077479197289965,1.0551367215794545,1.112195309922863,6717,grid_dijkstra,Grid Dijkstra,scene_metric_largest_component_ratio,largest component ratio,5
+4,0.9998930338279755,1.0611897873063667,1.0334902815356908,1.079109719140094,6718,grid_dijkstra,Grid Dijkstra,scene_metric_largest_component_ratio,largest component ratio,5
+5,1.0,1.0311969815729465,1.0172753973225044,1.0553159856137315,13436,grid_dijkstra,Grid Dijkstra,scene_metric_largest_component_ratio,largest component ratio,5
+1,0.0087690709894968,1.022465039467138,1.0138626061485323,1.0327771570233466,6719,grid_dijkstra,Grid Dijkstra,scene_metric_boundary_density,boundary density,6
+2,0.02140386073275897,1.0602022199550603,1.0355779597856933,1.0760247658918016,6718,grid_dijkstra,Grid Dijkstra,scene_metric_boundary_density,boundary density,6
+3,0.032016844321449515,1.0613711814607707,1.0412592935145804,1.079399399373607,6718,grid_dijkstra,Grid Dijkstra,scene_metric_boundary_density,boundary density,6
+4,0.04177205052135692,1.0704337236014851,1.0449936730999023,1.0928647754691085,6718,grid_dijkstra,Grid Dijkstra,scene_metric_boundary_density,boundary density,6
+5,0.06158356248522758,1.0943008264591745,1.0720962806611696,1.15684560952208,6718,grid_dijkstra,Grid Dijkstra,scene_metric_boundary_density,boundary density,6
+6,0.10876222671397077,1.201572072613454,1.1096480862453189,1.2968502680798522,6718,grid_dijkstra,Grid Dijkstra,scene_metric_boundary_density,boundary density,6
+1,0.0451,1.009534803031427,1.0024816245708286,1.0243189533046602,6548,rrt,RRT,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+2,0.0722,1.0169371620006067,1.0060018347443607,1.0364439917120984,6541,rrt,RRT,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+3,0.113,1.0435952935074844,1.0191664988787288,1.0865695406283375,6539,rrt,RRT,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+4,0.1839,1.1105410189420502,1.0528385814354344,1.2015815766131017,6528,rrt,RRT,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+5,0.3108,1.1752337569923277,1.0929409283248586,1.2777891144382165,6541,rrt,RRT,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+6,0.4284,1.1880010178073426,1.106516625690676,1.3145768494214338,6537,rrt,RRT,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+1,0.9905798159778005,1.2139800828302407,1.1190060542813005,1.3269407357192917,6539,rrt,RRT,scene_metric_largest_component_ratio,largest component ratio,5
+2,0.9986399604352126,1.1392673728584188,1.0777660206915092,1.2351522317782668,6539,rrt,RRT,scene_metric_largest_component_ratio,largest component ratio,5
+3,0.9996443053283062,1.0954460410513767,1.0457868518973874,1.1792339324865777,6539,rrt,RRT,scene_metric_largest_component_ratio,largest component ratio,5
+4,0.9999337989467505,1.0375306821544146,1.0145526025970222,1.0867627076428215,6540,rrt,RRT,scene_metric_largest_component_ratio,largest component ratio,5
+5,1.0,1.015031053451928,1.0043227067079035,1.0388598295665465,13077,rrt,RRT,scene_metric_largest_component_ratio,largest component ratio,5
+1,0.008697150110098728,1.008202659307945,1.002738164458857,1.0186636498572816,6539,rrt,RRT,scene_metric_boundary_density,boundary density,6
+2,0.0212016757527869,1.0306462545656612,1.0116864488460195,1.0695809883181986,6539,rrt,RRT,scene_metric_boundary_density,boundary density,6
+3,0.03267443471233153,1.0578383288321163,1.0240850301410718,1.119105103267667,6539,rrt,RRT,scene_metric_boundary_density,boundary density,6
+4,0.044387599948231514,1.080229777434613,1.0328021720706149,1.1631883734219974,6539,rrt,RRT,scene_metric_boundary_density,boundary density,6
+5,0.06352239976891834,1.1397197774563161,1.0631313791482455,1.2522231249046154,6539,rrt,RRT,scene_metric_boundary_density,boundary density,6
+6,0.1162186589245219,1.2186092910183917,1.1181177764546346,1.3317718829115335,6539,rrt,RRT,scene_metric_boundary_density,boundary density,6
+1,0.0462,1.000640567476995,1.0001118597198566,1.0016347730505317,6882,visibility_astar,Visibility A*,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+2,0.074,1.0014523044894927,1.000519108620951,1.0030841122646186,6865,visibility_astar,Visibility A*,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+3,0.1229,1.0053225918410063,1.00236569713896,1.010174681720515,6871,visibility_astar,Visibility A*,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+4,0.196,1.0160172455993843,1.0070510390387601,1.0509946425232277,6859,visibility_astar,Visibility A*,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+5,0.3186,1.033828800087156,1.016105955512759,1.1330352614490793,6872,visibility_astar,Visibility A*,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+6,0.4268,1.0375955100927448,1.020547023037678,1.1241284387323733,6867,visibility_astar,Visibility A*,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+1,0.987585025269119,1.0623719427092406,1.0254132399836386,1.1587380721431988,6870,visibility_astar,Visibility A*,scene_metric_largest_component_ratio,largest component ratio,5
+2,0.9982823077700314,1.0216600701928644,1.0106226672525653,1.0430120235846594,6869,visibility_astar,Visibility A*,scene_metric_largest_component_ratio,largest component ratio,5
+3,0.9995436707127864,1.0137532545406311,1.0063057481280322,1.0297810398221408,6869,visibility_astar,Visibility A*,scene_metric_largest_component_ratio,largest component ratio,5
+4,0.9998909457727044,1.0042622585507082,1.0014627065947277,1.0108901808597923,6870,visibility_astar,Visibility A*,scene_metric_largest_component_ratio,largest component ratio,5
+5,1.0,1.0011571313188008,1.0002984176156002,1.0031983498104136,13738,visibility_astar,Visibility A*,scene_metric_largest_component_ratio,largest component ratio,5
+1,0.008842659159411853,1.0009109763229629,1.0002892182509284,1.0019784953604975,6870,visibility_astar,Visibility A*,scene_metric_boundary_density,boundary density,6
+2,0.02165288360380705,1.0026769484352633,1.0007324191509006,1.0060573313532815,6869,visibility_astar,Visibility A*,scene_metric_boundary_density,boundary density,6
+3,0.03252609302546088,1.0086264102962756,1.0027969234961,1.0203338985645298,6869,visibility_astar,Visibility A*,scene_metric_boundary_density,boundary density,6
+4,0.04320771665428105,1.0102297924606594,1.0038634824278132,1.0259469792669094,6869,visibility_astar,Visibility A*,scene_metric_boundary_density,boundary density,6
+5,0.06295773852529336,1.0241678963992538,1.0108428241300373,1.0640690878420422,6869,visibility_astar,Visibility A*,scene_metric_boundary_density,boundary density,6
+6,0.11512519863931833,1.0877927155883804,1.0259620054922385,1.1949214193574151,6870,visibility_astar,Visibility A*,scene_metric_boundary_density,boundary density,6
+1,0.0462,1.000640567476995,1.0001118597198566,1.0016347730505317,6882,visibility_dijkstra,Visibility Dijkstra,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+2,0.074,1.0014523044894927,1.000519108620951,1.0030841122646186,6865,visibility_dijkstra,Visibility Dijkstra,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+3,0.1229,1.0053225918410063,1.00236569713896,1.010174681720515,6871,visibility_dijkstra,Visibility Dijkstra,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+4,0.196,1.0160172455993843,1.0070510390387601,1.0509946425232277,6859,visibility_dijkstra,Visibility Dijkstra,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+5,0.3186,1.033828800087156,1.016105955512759,1.1330352614490793,6872,visibility_dijkstra,Visibility Dijkstra,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+6,0.4268,1.0375955100927448,1.020547023037678,1.1241284387323733,6867,visibility_dijkstra,Visibility Dijkstra,scene_metric_obstacle_area_ratio,obstacle area ratio,6
+1,0.987585025269119,1.0623719427092406,1.0254132399836386,1.1587380721431988,6870,visibility_dijkstra,Visibility Dijkstra,scene_metric_largest_component_ratio,largest component ratio,5
+2,0.9982823077700314,1.0216600701928644,1.0106226672525653,1.0430120235846594,6869,visibility_dijkstra,Visibility Dijkstra,scene_metric_largest_component_ratio,largest component ratio,5
+3,0.9995436707127864,1.0137532545406311,1.0063057481280322,1.0297810398221408,6869,visibility_dijkstra,Visibility Dijkstra,scene_metric_largest_component_ratio,largest component ratio,5
+4,0.9998909457727044,1.0042622585507082,1.0014627065947277,1.0108901808597923,6870,visibility_dijkstra,Visibility Dijkstra,scene_metric_largest_component_ratio,largest component ratio,5
+5,1.0,1.0011571313188008,1.0002984176156002,1.0031983498104136,13738,visibility_dijkstra,Visibility Dijkstra,scene_metric_largest_component_ratio,largest component ratio,5
+1,0.008842659159411853,1.0009109763229629,1.0002892182509284,1.0019784953604975,6870,visibility_dijkstra,Visibility Dijkstra,scene_metric_boundary_density,boundary density,6
+2,0.02165288360380705,1.0026769484352633,1.0007324191509006,1.0060573313532815,6869,visibility_dijkstra,Visibility Dijkstra,scene_metric_boundary_density,boundary density,6
+3,0.03252609302546088,1.0086264102962756,1.0027969234961,1.0203338985645298,6869,visibility_dijkstra,Visibility Dijkstra,scene_metric_boundary_density,boundary density,6
+4,0.04320771665428105,1.0102297924606594,1.0038634824278132,1.0259469792669094,6869,visibility_dijkstra,Visibility Dijkstra,scene_metric_boundary_density,boundary density,6
+5,0.06295773852529336,1.0241678963992538,1.0108428241300373,1.0640690878420422,6869,visibility_dijkstra,Visibility Dijkstra,scene_metric_boundary_density,boundary density,6
+6,0.11512519863931833,1.0877927155883804,1.0259620054922385,1.1949214193574151,6870,visibility_dijkstra,Visibility Dijkstra,scene_metric_boundary_density,boundary density,6

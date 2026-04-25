@@ -1,0 +1,6 @@
+algorithm_id,success_rate_executed,executed_runs,algorithm_label
+visibility_astar,0.9735219784113187,42337,Visibility A*
+visibility_dijkstra,0.9735219784113187,42337,Visibility Dijkstra
+grid_astar,0.9520986371259182,42337,Grid A*
+grid_dijkstra,0.9520986371259182,42337,Grid Dijkstra
+rrt,0.9267071356024281,42337,RRT

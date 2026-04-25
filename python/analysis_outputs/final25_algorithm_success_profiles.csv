@@ -1,0 +1,231 @@
+algorithm_id,metric_bin_rank,metric_value,success_rate,sample_count,metric,metric_label,algorithm_label
+grid_astar,1,0.00801051952853092,1.0,5293,scene_metric_boundary_density,boundary density,Grid A*
+grid_astar,2,0.01833271472859129,0.9998110355253212,5292,scene_metric_boundary_density,boundary density,Grid A*
+grid_astar,3,0.025512584984000785,0.9998110355253212,5292,scene_metric_boundary_density,boundary density,Grid A*
+grid_astar,4,0.034240348805698734,0.9975434618291761,5292,scene_metric_boundary_density,boundary density,Grid A*
+grid_astar,5,0.042532492917807085,0.9941421012849584,5292,scene_metric_boundary_density,boundary density,Grid A*
+grid_astar,6,0.058330782079908314,0.9778911564625851,5292,scene_metric_boundary_density,boundary density,Grid A*
+grid_astar,7,0.08210065099089173,0.9618291761148904,5292,scene_metric_boundary_density,boundary density,Grid A*
+grid_astar,8,0.13707994113996458,0.6857520786092215,5292,scene_metric_boundary_density,boundary density,Grid A*
+grid_dijkstra,1,0.00801051952853092,1.0,5293,scene_metric_boundary_density,boundary density,Grid Dijkstra
+grid_dijkstra,2,0.01833271472859129,0.9998110355253212,5292,scene_metric_boundary_density,boundary density,Grid Dijkstra
+grid_dijkstra,3,0.025512584984000785,0.9998110355253212,5292,scene_metric_boundary_density,boundary density,Grid Dijkstra
+grid_dijkstra,4,0.034240348805698734,0.9975434618291761,5292,scene_metric_boundary_density,boundary density,Grid Dijkstra
+grid_dijkstra,5,0.042532492917807085,0.9941421012849584,5292,scene_metric_boundary_density,boundary density,Grid Dijkstra
+grid_dijkstra,6,0.058330782079908314,0.9778911564625851,5292,scene_metric_boundary_density,boundary density,Grid Dijkstra
+grid_dijkstra,7,0.08210065099089173,0.9618291761148904,5292,scene_metric_boundary_density,boundary density,Grid Dijkstra
+grid_dijkstra,8,0.13707994113996458,0.6857520786092215,5292,scene_metric_boundary_density,boundary density,Grid Dijkstra
+rrt,1,0.00801051952853092,0.9977328547137729,5293,scene_metric_boundary_density,boundary density,RRT
+rrt,2,0.01833271472859129,0.9792139077853363,5292,scene_metric_boundary_density,boundary density,RRT
+rrt,3,0.025512584984000785,0.8830309901738473,5292,scene_metric_boundary_density,boundary density,RRT
+rrt,4,0.034240348805698734,0.8992819349962207,5292,scene_metric_boundary_density,boundary density,RRT
+rrt,5,0.042532492917807085,0.940098261526833,5292,scene_metric_boundary_density,boundary density,RRT
+rrt,6,0.058330782079908314,0.9580498866213152,5292,scene_metric_boundary_density,boundary density,RRT
+rrt,7,0.08210065099089173,0.9627739984882842,5292,scene_metric_boundary_density,boundary density,RRT
+rrt,8,0.13707994113996458,0.7934618291761149,5292,scene_metric_boundary_density,boundary density,RRT
+visibility_astar,1,0.00801051952853092,1.0,5293,scene_metric_boundary_density,boundary density,Visibility A*
+visibility_astar,2,0.01833271472859129,1.0,5292,scene_metric_boundary_density,boundary density,Visibility A*
+visibility_astar,3,0.025512584984000785,0.9998110355253212,5292,scene_metric_boundary_density,boundary density,Visibility A*
+visibility_astar,4,0.034240348805698734,0.999244142101285,5292,scene_metric_boundary_density,boundary density,Visibility A*
+visibility_astar,5,0.042532492917807085,0.99848828420257,5292,scene_metric_boundary_density,boundary density,Visibility A*
+visibility_astar,6,0.058330782079908314,0.9892290249433107,5292,scene_metric_boundary_density,boundary density,Visibility A*
+visibility_astar,7,0.08210065099089173,0.9875283446712018,5292,scene_metric_boundary_density,boundary density,Visibility A*
+visibility_astar,8,0.13707994113996458,0.813869992441421,5292,scene_metric_boundary_density,boundary density,Visibility A*
+visibility_dijkstra,1,0.00801051952853092,1.0,5293,scene_metric_boundary_density,boundary density,Visibility Dijkstra
+visibility_dijkstra,2,0.01833271472859129,1.0,5292,scene_metric_boundary_density,boundary density,Visibility Dijkstra
+visibility_dijkstra,3,0.025512584984000785,0.9998110355253212,5292,scene_metric_boundary_density,boundary density,Visibility Dijkstra
+visibility_dijkstra,4,0.034240348805698734,0.999244142101285,5292,scene_metric_boundary_density,boundary density,Visibility Dijkstra
+visibility_dijkstra,5,0.042532492917807085,0.99848828420257,5292,scene_metric_boundary_density,boundary density,Visibility Dijkstra
+visibility_dijkstra,6,0.058330782079908314,0.9892290249433107,5292,scene_metric_boundary_density,boundary density,Visibility Dijkstra
+visibility_dijkstra,7,0.08210065099089173,0.9875283446712018,5292,scene_metric_boundary_density,boundary density,Visibility Dijkstra
+visibility_dijkstra,8,0.13707994113996458,0.813869992441421,5292,scene_metric_boundary_density,boundary density,Visibility Dijkstra
+grid_astar,1,0.5802941962414075,0.8928773852257699,5293,scene_metric_cell_density_cv,cell density CV,Grid A*
+grid_astar,2,0.6984193171564638,0.8747165532879818,5292,scene_metric_cell_density_cv,cell density CV,Grid A*
+grid_astar,3,0.9290337031902822,0.907785336356765,5292,scene_metric_cell_density_cv,cell density CV,Grid A*
+grid_astar,4,1.1980270598190472,0.9750566893424036,5292,scene_metric_cell_density_cv,cell density CV,Grid A*
+grid_astar,5,1.3787015804850813,0.9939531368102796,5292,scene_metric_cell_density_cv,cell density CV,Grid A*
+grid_astar,6,1.5769878902949601,0.9803476946334089,5292,scene_metric_cell_density_cv,cell density CV,Grid A*
+grid_astar,7,1.7717176129704613,0.9922524565381708,5292,scene_metric_cell_density_cv,cell density CV,Grid A*
+grid_astar,8,2.110982830607245,0.9998110355253212,5292,scene_metric_cell_density_cv,cell density CV,Grid A*
+grid_dijkstra,1,0.5802941962414075,0.8928773852257699,5293,scene_metric_cell_density_cv,cell density CV,Grid Dijkstra
+grid_dijkstra,2,0.6984193171564638,0.8747165532879818,5292,scene_metric_cell_density_cv,cell density CV,Grid Dijkstra
+grid_dijkstra,3,0.9290337031902822,0.907785336356765,5292,scene_metric_cell_density_cv,cell density CV,Grid Dijkstra
+grid_dijkstra,4,1.1980270598190472,0.9750566893424036,5292,scene_metric_cell_density_cv,cell density CV,Grid Dijkstra
+grid_dijkstra,5,1.3787015804850813,0.9939531368102796,5292,scene_metric_cell_density_cv,cell density CV,Grid Dijkstra
+grid_dijkstra,6,1.5769878902949601,0.9803476946334089,5292,scene_metric_cell_density_cv,cell density CV,Grid Dijkstra
+grid_dijkstra,7,1.7717176129704613,0.9922524565381708,5292,scene_metric_cell_density_cv,cell density CV,Grid Dijkstra
+grid_dijkstra,8,2.110982830607245,0.9998110355253212,5292,scene_metric_cell_density_cv,cell density CV,Grid Dijkstra
+rrt,1,0.5802941962414075,0.7972794256565275,5293,scene_metric_cell_density_cv,cell density CV,RRT
+rrt,2,0.6984193171564638,0.8047996976568406,5292,scene_metric_cell_density_cv,cell density CV,RRT
+rrt,3,0.9290337031902822,0.871504157218443,5292,scene_metric_cell_density_cv,cell density CV,RRT
+rrt,4,1.1980270598190472,0.9737339380196524,5292,scene_metric_cell_density_cv,cell density CV,RRT
+rrt,5,1.3787015804850813,0.9958427815570673,5292,scene_metric_cell_density_cv,cell density CV,RRT
+rrt,6,1.5769878902949601,0.9801587301587301,5292,scene_metric_cell_density_cv,cell density CV,RRT
+rrt,7,1.7717176129704613,0.9914965986394558,5292,scene_metric_cell_density_cv,cell density CV,RRT
+rrt,8,2.110982830607245,0.9988662131519275,5292,scene_metric_cell_density_cv,cell density CV,RRT
+visibility_astar,1,0.5802941962414075,0.939164934819573,5293,scene_metric_cell_density_cv,cell density CV,Visibility A*
+visibility_astar,2,0.6984193171564638,0.9404761904761905,5292,scene_metric_cell_density_cv,cell density CV,Visibility A*
+visibility_astar,3,0.9290337031902822,0.9393424036281179,5292,scene_metric_cell_density_cv,cell density CV,Visibility A*
+visibility_astar,4,1.1980270598190472,0.9822373393801965,5292,scene_metric_cell_density_cv,cell density CV,Visibility A*
+visibility_astar,5,1.3787015804850813,0.99848828420257,5292,scene_metric_cell_density_cv,cell density CV,Visibility A*
+visibility_astar,6,1.5769878902949601,0.9920634920634921,5292,scene_metric_cell_density_cv,cell density CV,Visibility A*
+visibility_astar,7,1.7717176129704613,0.9964096749811036,5292,scene_metric_cell_density_cv,cell density CV,Visibility A*
+visibility_astar,8,2.110982830607245,1.0,5292,scene_metric_cell_density_cv,cell density CV,Visibility A*
+visibility_dijkstra,1,0.5802941962414075,0.939164934819573,5293,scene_metric_cell_density_cv,cell density CV,Visibility Dijkstra
+visibility_dijkstra,2,0.6984193171564638,0.9404761904761905,5292,scene_metric_cell_density_cv,cell density CV,Visibility Dijkstra
+visibility_dijkstra,3,0.9290337031902822,0.9393424036281179,5292,scene_metric_cell_density_cv,cell density CV,Visibility Dijkstra
+visibility_dijkstra,4,1.1980270598190472,0.9822373393801965,5292,scene_metric_cell_density_cv,cell density CV,Visibility Dijkstra
+visibility_dijkstra,5,1.3787015804850813,0.99848828420257,5292,scene_metric_cell_density_cv,cell density CV,Visibility Dijkstra
+visibility_dijkstra,6,1.5769878902949601,0.9920634920634921,5292,scene_metric_cell_density_cv,cell density CV,Visibility Dijkstra
+visibility_dijkstra,7,1.7717176129704613,0.9964096749811036,5292,scene_metric_cell_density_cv,cell density CV,Visibility Dijkstra
+visibility_dijkstra,8,2.110982830607245,1.0,5292,scene_metric_cell_density_cv,cell density CV,Visibility Dijkstra
+grid_astar,1,0.6012681350317837,0.7645731477999248,5318,scene_metric_clearance,clearance,Grid A*
+grid_astar,2,0.9642857142857144,0.9113347256502753,5267,scene_metric_clearance,clearance,Grid A*
+grid_astar,3,1.39212353582346,0.9747139165743817,5418,scene_metric_clearance,clearance,Grid A*
+grid_astar,4,1.7678571428571428,0.9942652329749104,5580,scene_metric_clearance,clearance,Grid A*
+grid_astar,5,2.109160080755272,0.9872132380594209,5318,scene_metric_clearance,clearance,Grid A*
+grid_astar,6,2.565561254618426,0.9878400659521847,4852,scene_metric_clearance,clearance,Grid A*
+grid_astar,7,4.285714285714221,0.9975434618291761,5292,scene_metric_clearance,clearance,Grid A*
+grid_astar,8,6.428571428571445,1.0,5292,scene_metric_clearance,clearance,Grid A*
+grid_dijkstra,1,0.6012681350317837,0.7645731477999248,5318,scene_metric_clearance,clearance,Grid Dijkstra
+grid_dijkstra,2,0.9642857142857144,0.9113347256502753,5267,scene_metric_clearance,clearance,Grid Dijkstra
+grid_dijkstra,3,1.39212353582346,0.9747139165743817,5418,scene_metric_clearance,clearance,Grid Dijkstra
+grid_dijkstra,4,1.7678571428571428,0.9942652329749104,5580,scene_metric_clearance,clearance,Grid Dijkstra
+grid_dijkstra,5,2.109160080755272,0.9872132380594209,5318,scene_metric_clearance,clearance,Grid Dijkstra
+grid_dijkstra,6,2.565561254618426,0.9878400659521847,4852,scene_metric_clearance,clearance,Grid Dijkstra
+grid_dijkstra,7,4.285714285714221,0.9975434618291761,5292,scene_metric_clearance,clearance,Grid Dijkstra
+grid_dijkstra,8,6.428571428571445,1.0,5292,scene_metric_clearance,clearance,Grid Dijkstra
+rrt,1,0.6012681350317837,0.859157578036856,5318,scene_metric_clearance,clearance,RRT
+rrt,2,0.9642857142857144,0.9337383709891779,5267,scene_metric_clearance,clearance,RRT
+rrt,3,1.39212353582346,0.9483204134366925,5418,scene_metric_clearance,clearance,RRT
+rrt,4,1.7678571428571428,0.9888888888888889,5580,scene_metric_clearance,clearance,RRT
+rrt,5,2.109160080755272,0.9843926288078225,5318,scene_metric_clearance,clearance,RRT
+rrt,6,2.565561254618426,0.9760923330585326,4852,scene_metric_clearance,clearance,RRT
+rrt,7,4.285714285714221,0.7316704459561603,5292,scene_metric_clearance,clearance,RRT
+rrt,8,6.428571428571445,0.9916855631141346,5292,scene_metric_clearance,clearance,RRT
+visibility_astar,1,0.6012681350317837,0.8728845430613013,5318,scene_metric_clearance,clearance,Visibility A*
+visibility_astar,2,0.9642857142857144,0.9456996392633378,5267,scene_metric_clearance,clearance,Visibility A*
+visibility_astar,3,1.39212353582346,0.9837578442229605,5418,scene_metric_clearance,clearance,Visibility A*
+visibility_astar,4,1.7678571428571428,0.9983870967741936,5580,scene_metric_clearance,clearance,Visibility A*
+visibility_astar,5,2.109160080755272,0.9952989845806695,5318,scene_metric_clearance,clearance,Visibility A*
+visibility_astar,6,2.565561254618426,0.9942291838417148,4852,scene_metric_clearance,clearance,Visibility A*
+visibility_astar,7,4.285714285714221,0.9982993197278912,5292,scene_metric_clearance,clearance,Visibility A*
+visibility_astar,8,6.428571428571445,1.0,5292,scene_metric_clearance,clearance,Visibility A*
+visibility_dijkstra,1,0.6012681350317837,0.8728845430613013,5318,scene_metric_clearance,clearance,Visibility Dijkstra
+visibility_dijkstra,2,0.9642857142857144,0.9456996392633378,5267,scene_metric_clearance,clearance,Visibility Dijkstra
+visibility_dijkstra,3,1.39212353582346,0.9837578442229605,5418,scene_metric_clearance,clearance,Visibility Dijkstra
+visibility_dijkstra,4,1.7678571428571428,0.9983870967741936,5580,scene_metric_clearance,clearance,Visibility Dijkstra
+visibility_dijkstra,5,2.109160080755272,0.9952989845806695,5318,scene_metric_clearance,clearance,Visibility Dijkstra
+visibility_dijkstra,6,2.565561254618426,0.9942291838417148,4852,scene_metric_clearance,clearance,Visibility Dijkstra
+visibility_dijkstra,7,4.285714285714221,0.9982993197278912,5292,scene_metric_clearance,clearance,Visibility Dijkstra
+visibility_dijkstra,8,6.428571428571445,1.0,5292,scene_metric_clearance,clearance,Visibility Dijkstra
+grid_astar,1,0.968455551003687,0.6586057056489704,5293,scene_metric_largest_component_ratio,largest component ratio,Grid A*
+grid_astar,2,0.996093273046398,0.9773242630385488,5292,scene_metric_largest_component_ratio,largest component ratio,Grid A*
+grid_astar,3,0.9988128916868007,0.9894179894179894,5292,scene_metric_largest_component_ratio,largest component ratio,Grid A*
+grid_astar,4,0.9995644192737634,0.9943310657596371,5292,scene_metric_largest_component_ratio,largest component ratio,Grid A*
+grid_astar,5,0.9998805970144997,0.9982993197278912,5292,scene_metric_largest_component_ratio,largest component ratio,Grid A*
+grid_astar,6,1.0,0.9996220710506425,15876,scene_metric_largest_component_ratio,largest component ratio,Grid A*
+grid_dijkstra,1,0.968455551003687,0.6586057056489704,5293,scene_metric_largest_component_ratio,largest component ratio,Grid Dijkstra
+grid_dijkstra,2,0.996093273046398,0.9773242630385488,5292,scene_metric_largest_component_ratio,largest component ratio,Grid Dijkstra
+grid_dijkstra,3,0.9988128916868007,0.9894179894179894,5292,scene_metric_largest_component_ratio,largest component ratio,Grid Dijkstra
+grid_dijkstra,4,0.9995644192737634,0.9943310657596371,5292,scene_metric_largest_component_ratio,largest component ratio,Grid Dijkstra
+grid_dijkstra,5,0.9998805970144997,0.9982993197278912,5292,scene_metric_largest_component_ratio,largest component ratio,Grid Dijkstra
+grid_dijkstra,6,1.0,0.9996220710506425,15876,scene_metric_largest_component_ratio,largest component ratio,Grid Dijkstra
+rrt,1,0.968455551003687,0.6332892499527678,5293,scene_metric_largest_component_ratio,largest component ratio,RRT
+rrt,2,0.996093273046398,0.8852985638699924,5292,scene_metric_largest_component_ratio,largest component ratio,RRT
+rrt,3,0.9988128916868007,0.9293272864701436,5292,scene_metric_largest_component_ratio,largest component ratio,RRT
+rrt,4,0.9995644192737634,0.9722222222222222,5292,scene_metric_largest_component_ratio,largest component ratio,RRT
+rrt,5,0.9998805970144997,0.9964096749811036,5292,scene_metric_largest_component_ratio,largest component ratio,RRT
+rrt,6,1.0,0.9990551776266062,15876,scene_metric_largest_component_ratio,largest component ratio,RRT
+visibility_astar,1,0.968455551003687,0.7925562063102211,5293,scene_metric_largest_component_ratio,largest component ratio,Visibility A*
+visibility_astar,2,0.996093273046398,0.9964096749811036,5292,scene_metric_largest_component_ratio,largest component ratio,Visibility A*
+visibility_astar,3,0.9988128916868007,0.999244142101285,5292,scene_metric_largest_component_ratio,largest component ratio,Visibility A*
+visibility_astar,4,0.9995644192737634,1.0,5292,scene_metric_largest_component_ratio,largest component ratio,Visibility A*
+visibility_astar,5,0.9998805970144997,1.0,5292,scene_metric_largest_component_ratio,largest component ratio,Visibility A*
+visibility_astar,6,1.0,1.0,15876,scene_metric_largest_component_ratio,largest component ratio,Visibility A*
+visibility_dijkstra,1,0.968455551003687,0.7925562063102211,5293,scene_metric_largest_component_ratio,largest component ratio,Visibility Dijkstra
+visibility_dijkstra,2,0.996093273046398,0.9964096749811036,5292,scene_metric_largest_component_ratio,largest component ratio,Visibility Dijkstra
+visibility_dijkstra,3,0.9988128916868007,0.999244142101285,5292,scene_metric_largest_component_ratio,largest component ratio,Visibility Dijkstra
+visibility_dijkstra,4,0.9995644192737634,1.0,5292,scene_metric_largest_component_ratio,largest component ratio,Visibility Dijkstra
+visibility_dijkstra,5,0.9998805970144997,1.0,5292,scene_metric_largest_component_ratio,largest component ratio,Visibility Dijkstra
+visibility_dijkstra,6,1.0,1.0,15876,scene_metric_largest_component_ratio,largest component ratio,Visibility Dijkstra
+grid_astar,1,0.0406,1.0,5298,scene_metric_obstacle_area_ratio,obstacle area ratio,Grid A*
+grid_astar,2,0.0657,0.9998118178396688,5314,scene_metric_obstacle_area_ratio,obstacle area ratio,Grid A*
+grid_astar,3,0.0877,1.0,5270,scene_metric_obstacle_area_ratio,obstacle area ratio,Grid A*
+grid_astar,4,0.1366,0.9956505295007564,5288,scene_metric_obstacle_area_ratio,obstacle area ratio,Grid A*
+grid_astar,5,0.1933,0.9737488196411709,5295,scene_metric_obstacle_area_ratio,obstacle area ratio,Grid A*
+grid_astar,6,0.2948,0.9905482041587902,5290,scene_metric_obstacle_area_ratio,obstacle area ratio,Grid A*
+grid_astar,7,0.3609,0.9400756143667297,5290,scene_metric_obstacle_area_ratio,obstacle area ratio,Grid A*
+grid_astar,8,0.4662,0.716931216931217,5292,scene_metric_obstacle_area_ratio,obstacle area ratio,Grid A*
+grid_dijkstra,1,0.0406,1.0,5298,scene_metric_obstacle_area_ratio,obstacle area ratio,Grid Dijkstra
+grid_dijkstra,2,0.0657,0.9998118178396688,5314,scene_metric_obstacle_area_ratio,obstacle area ratio,Grid Dijkstra
+grid_dijkstra,3,0.0877,1.0,5270,scene_metric_obstacle_area_ratio,obstacle area ratio,Grid Dijkstra
+grid_dijkstra,4,0.1366,0.9956505295007564,5288,scene_metric_obstacle_area_ratio,obstacle area ratio,Grid Dijkstra
+grid_dijkstra,5,0.1933,0.9737488196411709,5295,scene_metric_obstacle_area_ratio,obstacle area ratio,Grid Dijkstra
+grid_dijkstra,6,0.2948,0.9905482041587902,5290,scene_metric_obstacle_area_ratio,obstacle area ratio,Grid Dijkstra
+grid_dijkstra,7,0.3609,0.9400756143667297,5290,scene_metric_obstacle_area_ratio,obstacle area ratio,Grid Dijkstra
+grid_dijkstra,8,0.4662,0.716931216931217,5292,scene_metric_obstacle_area_ratio,obstacle area ratio,Grid Dijkstra
+rrt,1,0.0406,0.9990562476406191,5298,scene_metric_obstacle_area_ratio,obstacle area ratio,RRT
+rrt,2,0.0657,0.9988709070380128,5314,scene_metric_obstacle_area_ratio,obstacle area ratio,RRT
+rrt,3,0.0877,0.9990512333965844,5270,scene_metric_obstacle_area_ratio,obstacle area ratio,RRT
+rrt,4,0.1366,0.9846822995461422,5288,scene_metric_obstacle_area_ratio,obstacle area ratio,RRT
+rrt,5,0.1933,0.9512747875354107,5295,scene_metric_obstacle_area_ratio,obstacle area ratio,RRT
+rrt,6,0.2948,0.8391304347826087,5290,scene_metric_obstacle_area_ratio,obstacle area ratio,RRT
+rrt,7,0.3609,0.825897920604915,5290,scene_metric_obstacle_area_ratio,obstacle area ratio,RRT
+rrt,8,0.4662,0.8155706727135299,5292,scene_metric_obstacle_area_ratio,obstacle area ratio,RRT
+visibility_astar,1,0.0406,1.0,5298,scene_metric_obstacle_area_ratio,obstacle area ratio,Visibility A*
+visibility_astar,2,0.0657,1.0,5314,scene_metric_obstacle_area_ratio,obstacle area ratio,Visibility A*
+visibility_astar,3,0.0877,1.0,5270,scene_metric_obstacle_area_ratio,obstacle area ratio,Visibility A*
+visibility_astar,4,0.1366,0.999054462934947,5288,scene_metric_obstacle_area_ratio,obstacle area ratio,Visibility A*
+visibility_astar,5,0.1933,0.9888574126534466,5295,scene_metric_obstacle_area_ratio,obstacle area ratio,Visibility A*
+visibility_astar,6,0.2948,0.9954631379962193,5290,scene_metric_obstacle_area_ratio,obstacle area ratio,Visibility A*
+visibility_astar,7,0.3609,0.9616257088846881,5290,scene_metric_obstacle_area_ratio,obstacle area ratio,Visibility A*
+visibility_astar,8,0.4662,0.8431594860166288,5292,scene_metric_obstacle_area_ratio,obstacle area ratio,Visibility A*
+visibility_dijkstra,1,0.0406,1.0,5298,scene_metric_obstacle_area_ratio,obstacle area ratio,Visibility Dijkstra
+visibility_dijkstra,2,0.0657,1.0,5314,scene_metric_obstacle_area_ratio,obstacle area ratio,Visibility Dijkstra
+visibility_dijkstra,3,0.0877,1.0,5270,scene_metric_obstacle_area_ratio,obstacle area ratio,Visibility Dijkstra
+visibility_dijkstra,4,0.1366,0.999054462934947,5288,scene_metric_obstacle_area_ratio,obstacle area ratio,Visibility Dijkstra
+visibility_dijkstra,5,0.1933,0.9888574126534466,5295,scene_metric_obstacle_area_ratio,obstacle area ratio,Visibility Dijkstra
+visibility_dijkstra,6,0.2948,0.9954631379962193,5290,scene_metric_obstacle_area_ratio,obstacle area ratio,Visibility Dijkstra
+visibility_dijkstra,7,0.3609,0.9616257088846881,5290,scene_metric_obstacle_area_ratio,obstacle area ratio,Visibility Dijkstra
+visibility_dijkstra,8,0.4662,0.8431594860166288,5292,scene_metric_obstacle_area_ratio,obstacle area ratio,Visibility Dijkstra
+grid_astar,1,0.19637575565373705,0.9901757037596826,5293,scene_metric_radii_cv,radii CV,Grid A*
+grid_astar,2,0.2586248938539024,0.8554421768707483,5292,scene_metric_radii_cv,radii CV,Grid A*
+grid_astar,3,0.2902664903868366,0.8953136810279667,5292,scene_metric_radii_cv,radii CV,Grid A*
+grid_astar,4,0.30667189330249467,0.9348072562358276,5292,scene_metric_radii_cv,radii CV,Grid A*
+grid_astar,5,0.3198575762128038,0.9665532879818595,5292,scene_metric_radii_cv,radii CV,Grid A*
+grid_astar,6,0.3347249626339637,0.9828042328042328,5292,scene_metric_radii_cv,radii CV,Grid A*
+grid_astar,7,0.3568301196816507,0.9928193499622071,5292,scene_metric_radii_cv,radii CV,Grid A*
+grid_astar,8,0.4033013881993175,0.9988662131519275,5292,scene_metric_radii_cv,radii CV,Grid A*
+grid_dijkstra,1,0.19637575565373705,0.9901757037596826,5293,scene_metric_radii_cv,radii CV,Grid Dijkstra
+grid_dijkstra,2,0.2586248938539024,0.8554421768707483,5292,scene_metric_radii_cv,radii CV,Grid Dijkstra
+grid_dijkstra,3,0.2902664903868366,0.8953136810279667,5292,scene_metric_radii_cv,radii CV,Grid Dijkstra
+grid_dijkstra,4,0.30667189330249467,0.9348072562358276,5292,scene_metric_radii_cv,radii CV,Grid Dijkstra
+grid_dijkstra,5,0.3198575762128038,0.9665532879818595,5292,scene_metric_radii_cv,radii CV,Grid Dijkstra
+grid_dijkstra,6,0.3347249626339637,0.9828042328042328,5292,scene_metric_radii_cv,radii CV,Grid Dijkstra
+grid_dijkstra,7,0.3568301196816507,0.9928193499622071,5292,scene_metric_radii_cv,radii CV,Grid Dijkstra
+grid_dijkstra,8,0.4033013881993175,0.9988662131519275,5292,scene_metric_radii_cv,radii CV,Grid Dijkstra
+rrt,1,0.19637575565373705,0.9935764216890233,5293,scene_metric_radii_cv,radii CV,RRT
+rrt,2,0.2586248938539024,0.9081632653061225,5292,scene_metric_radii_cv,radii CV,RRT
+rrt,3,0.2902664903868366,0.9193121693121693,5292,scene_metric_radii_cv,radii CV,RRT
+rrt,4,0.30667189330249467,0.9319727891156463,5292,scene_metric_radii_cv,radii CV,RRT
+rrt,5,0.3198575762128038,0.9349962207105065,5292,scene_metric_radii_cv,radii CV,RRT
+rrt,6,0.3347249626339637,0.9002267573696145,5292,scene_metric_radii_cv,radii CV,RRT
+rrt,7,0.3568301196816507,0.9334845049130763,5292,scene_metric_radii_cv,radii CV,RRT
+rrt,8,0.4033013881993175,0.891912320483749,5292,scene_metric_radii_cv,radii CV,RRT
+visibility_astar,1,0.19637575565373705,0.9945210655582846,5293,scene_metric_radii_cv,radii CV,Visibility A*
+visibility_astar,2,0.2586248938539024,0.9183673469387755,5292,scene_metric_radii_cv,radii CV,Visibility A*
+visibility_astar,3,0.2902664903868366,0.9380196523053665,5292,scene_metric_radii_cv,radii CV,Visibility A*
+visibility_astar,4,0.30667189330249467,0.9642857142857143,5292,scene_metric_radii_cv,radii CV,Visibility A*
+visibility_astar,5,0.3198575762128038,0.983371126228269,5292,scene_metric_radii_cv,radii CV,Visibility A*
+visibility_astar,6,0.3347249626339637,0.9924414210128496,5292,scene_metric_radii_cv,radii CV,Visibility A*
+visibility_astar,7,0.3568301196816507,0.9973544973544973,5292,scene_metric_radii_cv,radii CV,Visibility A*
+visibility_astar,8,0.4033013881993175,0.9998110355253212,5292,scene_metric_radii_cv,radii CV,Visibility A*
+visibility_dijkstra,1,0.19637575565373705,0.9945210655582846,5293,scene_metric_radii_cv,radii CV,Visibility Dijkstra
+visibility_dijkstra,2,0.2586248938539024,0.9183673469387755,5292,scene_metric_radii_cv,radii CV,Visibility Dijkstra
+visibility_dijkstra,3,0.2902664903868366,0.9380196523053665,5292,scene_metric_radii_cv,radii CV,Visibility Dijkstra
+visibility_dijkstra,4,0.30667189330249467,0.9642857142857143,5292,scene_metric_radii_cv,radii CV,Visibility Dijkstra
+visibility_dijkstra,5,0.3198575762128038,0.983371126228269,5292,scene_metric_radii_cv,radii CV,Visibility Dijkstra
+visibility_dijkstra,6,0.3347249626339637,0.9924414210128496,5292,scene_metric_radii_cv,radii CV,Visibility Dijkstra
+visibility_dijkstra,7,0.3568301196816507,0.9973544973544973,5292,scene_metric_radii_cv,radii CV,Visibility Dijkstra
+visibility_dijkstra,8,0.4033013881993175,0.9998110355253212,5292,scene_metric_radii_cv,radii CV,Visibility Dijkstra

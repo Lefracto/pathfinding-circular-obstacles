@@ -1,0 +1,2 @@
+alpha,beta,gamma,delta,failure_score_penalty,quality_runtime_tolerance,target_min_class_share,selection_stage,selected_candidate,selected_strategy,selected_train_trim_quantile,autotuned,feature_count,scene_rows,present_classes,majority_share,min_share,normalized_entropy,proxy_objective,proxy_macro_f1,proxy_balanced_accuracy
+2.0,0.3,0.6,0.8,1.0,0.15,0.03,fast_joint_search,flat::hist_gradient_boosting|b=0.30|g=0.60|d=0.80|trim=0.05,flat,0.05,True,32,41217,3,0.3619137734429968,0.27799209064221075,0.9935282676328581,0.5951466255669386,0.6679966301511969,0.674311410373922
