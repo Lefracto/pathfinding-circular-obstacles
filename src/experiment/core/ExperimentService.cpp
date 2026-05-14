@@ -103,6 +103,41 @@ namespace experiment {
 
                 const algorithms::BenchmarkResult benchmark = planner->plan(instance.scene_data);
                 result.runtime_ms = benchmark.runtime_ms;
+                result.graph_build_time_ms = benchmark.graph_build_time_ms;
+                result.graph_search_time_ms = benchmark.graph_search_time_ms;
+                result.graph_path_extraction_time_ms = benchmark.graph_path_extraction_time_ms;
+                result.graph_node_count = benchmark.graph_node_count;
+                result.graph_edge_count = benchmark.graph_edge_count;
+                result.graph_expanded_nodes = benchmark.graph_expanded_nodes;
+
+                if (benchmark.graph_build_time_ms.has_value() ||
+                    benchmark.graph_search_time_ms.has_value()) {
+                    result.debug_info["graph_timing"] = nlohmann::json::object();
+                    result.debug_info["graph_timing"]["build_time_ms"] =
+                        benchmark.graph_build_time_ms.has_value()
+                            ? nlohmann::json(benchmark.graph_build_time_ms.value())
+                            : nlohmann::json(nullptr);
+                    result.debug_info["graph_timing"]["search_time_ms"] =
+                        benchmark.graph_search_time_ms.has_value()
+                            ? nlohmann::json(benchmark.graph_search_time_ms.value())
+                            : nlohmann::json(nullptr);
+                    result.debug_info["graph_timing"]["path_extraction_time_ms"] =
+                        benchmark.graph_path_extraction_time_ms.has_value()
+                            ? nlohmann::json(benchmark.graph_path_extraction_time_ms.value())
+                            : nlohmann::json(nullptr);
+                    result.debug_info["graph_timing"]["node_count"] =
+                        benchmark.graph_node_count.has_value()
+                            ? nlohmann::json(benchmark.graph_node_count.value())
+                            : nlohmann::json(nullptr);
+                    result.debug_info["graph_timing"]["edge_count"] =
+                        benchmark.graph_edge_count.has_value()
+                            ? nlohmann::json(benchmark.graph_edge_count.value())
+                            : nlohmann::json(nullptr);
+                    result.debug_info["graph_timing"]["expanded_nodes"] =
+                        benchmark.graph_expanded_nodes.has_value()
+                            ? nlohmann::json(benchmark.graph_expanded_nodes.value())
+                            : nlohmann::json(nullptr);
+                }
 
                 if (!benchmark.path.points.empty()) {
                     result.path = benchmark.path;
@@ -412,6 +447,60 @@ namespace experiment {
         experiment.last_saved_at = utc_timestamp_now();
     }
 
+    void ExperimentService::generate_instances_for_indices(Experiment& experiment,
+                                                           const std::vector<std::size_t>& scene_indices,
+                                                           std::atomic<std::size_t>* generated_counter) {
+        experiment.instances = SceneBatchGenerator::generate_instances_for_indices(
+            experiment.generator_config_snapshot,
+            scene_indices,
+            generated_counter);
+
+        if (experiment.generator_config_snapshot.metrics.auto_compute_on_generation) {
+            const SceneMetricsBatchResult metrics_result = SceneMetricsBatchCalculator::compute(
+                experiment.instances,
+                experiment.generator_config_snapshot.metrics);
+            const std::size_t count =
+                std::min(experiment.instances.size(), metrics_result.metrics.size());
+            for (std::size_t i = 0; i < count; ++i) {
+                experiment.instances[i].scene_metrics = metrics_result.metrics[i];
+            }
+        }
+
+        std::size_t generated_count = 0;
+        for (auto& instance : experiment.instances) {
+            instance.runs.clear();
+
+            if (instance.generation_status == SceneGenerationStatus::Generated) {
+                ++generated_count;
+                instance.run_status = SceneRunStatus::Ready;
+            } else {
+                instance.run_status = SceneRunStatus::Failed;
+            }
+
+            for (const auto& algorithm : experiment.algorithms) {
+                if (!algorithm.enabled) {
+                    continue;
+                }
+
+                AlgorithmRunResult run;
+                run.algorithm_id = algorithm.id;
+                run.status = AlgorithmRunStatus::NotRun;
+                run.success = false;
+                instance.runs.push_back(run);
+            }
+        }
+
+        if (experiment.instances.empty() || generated_count == 0) {
+            experiment.status = ExperimentStatus::Failed;
+        } else if (generated_count == experiment.instances.size()) {
+            experiment.status = ExperimentStatus::Generated;
+        } else {
+            experiment.status = ExperimentStatus::PartiallyCompleted;
+        }
+
+        experiment.last_saved_at = utc_timestamp_now();
+    }
+
     std::size_t ExperimentService::estimate_total_algorithm_runs(const Experiment& experiment) {
         const std::size_t enabled_algorithms = enabled_algorithm_count(experiment.algorithms);
         if (enabled_algorithms == 0 || experiment.instances.empty()) {
@@ -542,6 +631,7 @@ namespace experiment {
         report["last_saved_at"] = experiment.last_saved_at;
         report["global_seed"] = experiment.global_seed;
         report["source_config_path"] = experiment.source_config_path;
+        report["metadata"] = experiment.metadata.is_object() ? experiment.metadata : nlohmann::json::object();
         report["timing_clock"] = "steady_clock";
         report["generator_config_snapshot"] = GeneratorConfigIO::to_json(experiment.generator_config_snapshot);
 
@@ -567,6 +657,10 @@ namespace experiment {
         std::size_t failed_runs = 0;
         double runtime_sum = 0.0;
         std::size_t runtime_count = 0;
+        double graph_build_time_sum = 0.0;
+        std::size_t graph_build_time_count = 0;
+        double graph_search_time_sum = 0.0;
+        std::size_t graph_search_time_count = 0;
         double path_length_sum = 0.0;
         std::size_t path_length_count = 0;
 
@@ -586,6 +680,14 @@ namespace experiment {
                     runtime_sum += run.runtime_ms;
                     ++runtime_count;
                 }
+                if (run.graph_build_time_ms.has_value()) {
+                    graph_build_time_sum += run.graph_build_time_ms.value();
+                    ++graph_build_time_count;
+                }
+                if (run.graph_search_time_ms.has_value()) {
+                    graph_search_time_sum += run.graph_search_time_ms.value();
+                    ++graph_search_time_count;
+                }
                 if (run.path_metrics.path_length.has_value()) {
                     path_length_sum += run.path_metrics.path_length.value();
                     ++path_length_count;
@@ -599,6 +701,24 @@ namespace experiment {
                 row["algorithm_status"] = to_string(run.status);
                 row["success"] = run.success;
                 row["runtime_ms"] = run.runtime_ms;
+                row["graph_build_time_ms"] = run.graph_build_time_ms.has_value()
+                                                 ? nlohmann::json(run.graph_build_time_ms.value())
+                                                 : nlohmann::json(nullptr);
+                row["graph_search_time_ms"] = run.graph_search_time_ms.has_value()
+                                                  ? nlohmann::json(run.graph_search_time_ms.value())
+                                                  : nlohmann::json(nullptr);
+                row["graph_path_extraction_time_ms"] = run.graph_path_extraction_time_ms.has_value()
+                                                           ? nlohmann::json(run.graph_path_extraction_time_ms.value())
+                                                           : nlohmann::json(nullptr);
+                row["graph_node_count"] = run.graph_node_count.has_value()
+                                              ? nlohmann::json(run.graph_node_count.value())
+                                              : nlohmann::json(nullptr);
+                row["graph_edge_count"] = run.graph_edge_count.has_value()
+                                              ? nlohmann::json(run.graph_edge_count.value())
+                                              : nlohmann::json(nullptr);
+                row["graph_expanded_nodes"] = run.graph_expanded_nodes.has_value()
+                                                  ? nlohmann::json(run.graph_expanded_nodes.value())
+                                                  : nlohmann::json(nullptr);
                 row["path_found"] = run.path.has_value();
                 row["algorithm_debug_info"] = run.debug_info;
                 row["path_length"] = run.path_metrics.path_length.has_value()
@@ -644,6 +764,12 @@ namespace experiment {
         report["summary"]["avg_runtime_ms"] = runtime_count > 0
             ? nlohmann::json(runtime_sum / static_cast<double>(runtime_count))
             : nlohmann::json(nullptr);
+        report["summary"]["avg_graph_build_time_ms"] = graph_build_time_count > 0
+            ? nlohmann::json(graph_build_time_sum / static_cast<double>(graph_build_time_count))
+            : nlohmann::json(nullptr);
+        report["summary"]["avg_graph_search_time_ms"] = graph_search_time_count > 0
+            ? nlohmann::json(graph_search_time_sum / static_cast<double>(graph_search_time_count))
+            : nlohmann::json(nullptr);
         report["summary"]["avg_path_length"] = path_length_count > 0
             ? nlohmann::json(path_length_sum / static_cast<double>(path_length_count))
             : nlohmann::json(nullptr);
@@ -665,12 +791,4 @@ namespace experiment {
         }
     }
 
-} // namespace experiment
-
-
-
-
-
-
-
-
+}

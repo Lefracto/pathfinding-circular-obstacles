@@ -10,10 +10,16 @@ from typing import Any
 import pandas as pd
 
 
-EXPERIMENT_FILE_PATTERN = re.compile(r"exp_config_(\d+)_experiment\.json$", re.IGNORECASE)
+EXPERIMENT_FILE_PATTERNS = (
+    re.compile(r"exp_config_(\d+)_experiment\.json$", re.IGNORECASE),
+    re.compile(r"^(\d+)[_-].*_experiment\.json$", re.IGNORECASE),
+)
 SCENE_ID_PATTERN = re.compile(r"scene_(\d+)$", re.IGNORECASE)
 SCENE_METRIC_PREFIX = "scene_metric_"
 DATASET_NAMES = ("runs", "runs_analysis", "scenes", "files")
+GRAPH_ALGORITHM_IDS = frozenset(
+    ("grid_dijkstra", "grid_astar", "visibility_dijkstra", "visibility_astar")
+)
 
 
 @dataclass
@@ -47,10 +53,11 @@ def json_text(value: Any) -> str:
 
 
 def parse_config_index(experiment_path: Path) -> int | None:
-    match = EXPERIMENT_FILE_PATTERN.search(experiment_path.name)
-    if match is None:
-        return None
-    return int(match.group(1))
+    for pattern in EXPERIMENT_FILE_PATTERNS:
+        match = pattern.search(experiment_path.name)
+        if match is not None:
+            return int(match.group(1))
+    return None
 
 
 def parse_scene_index(instance_id: str) -> int | None:
@@ -67,6 +74,25 @@ def safe_float(value: Any) -> float | None:
         return float(value)
     if isinstance(value, (int, float)):
         return float(value)
+    return None
+
+
+def safe_int(value: Any) -> int | None:
+    if value is None:
+        return None
+    if isinstance(value, bool):
+        return int(value)
+    if isinstance(value, int):
+        return int(value)
+    if isinstance(value, float) and math.isfinite(value):
+        return int(value)
+    return None
+
+
+def first_non_null(*values: Any) -> Any:
+    for value in values:
+        if value is not None:
+            return value
     return None
 
 
@@ -102,6 +128,7 @@ def build_file_summary_record(
     )
     path_found_run_count = sum(1 for record in run_records if bool(record["path_found"]))
     failed_run_count = sum(1 for record in run_records if record["algorithm_status"] == "Failed")
+    graph_timed_run_count = sum(1 for record in run_records if bool(record.get("has_graph_timing")))
 
     return {
         "experiment_file": experiment_path.name,
@@ -122,6 +149,7 @@ def build_file_summary_record(
         "not_run_count": not_run_count,
         "path_found_run_count": path_found_run_count,
         "failed_run_count": failed_run_count,
+        "graph_timed_run_count": graph_timed_run_count,
     }
 
 
@@ -132,6 +160,7 @@ def parse_experiment_file(experiment_path: str | Path) -> tuple[list[dict[str, A
 
     config = experiment_data.get("generator_config_snapshot", {})
     config_index = parse_config_index(experiment_path)
+    experiment_metadata = experiment_data.get("metadata", {}) or {}
 
     top_level_algorithms = experiment_data.get("algorithms", [])
     top_level_algorithm_map = {algorithm.get("id"): algorithm for algorithm in top_level_algorithms}
@@ -151,6 +180,19 @@ def parse_experiment_file(experiment_path: str | Path) -> tuple[list[dict[str, A
         "experiment_created_at": experiment_data.get("created_at"),
         "experiment_last_saved_at": experiment_data.get("last_saved_at"),
         "experiment_global_seed": experiment_data.get("global_seed"),
+        "experiment_study_mode": experiment_metadata.get("study_mode"),
+        "experiment_metadata_json": json_text(experiment_metadata),
+        "experiment_scene_sample_fraction": safe_float(experiment_metadata.get("scene_sample_fraction")),
+        "experiment_source_instance_count": safe_int(experiment_metadata.get("source_instance_count")),
+        "experiment_sampled_scene_count": safe_int(experiment_metadata.get("sampled_scene_count")),
+        "experiment_scene_sampling_method": experiment_metadata.get("scene_sampling_method"),
+        "experiment_grid_obstacle_spatial_index_enabled": bool(
+            experiment_metadata.get("grid_obstacle_spatial_index_enabled", False)
+        ),
+        "experiment_grid_obstacle_spatial_index_algorithm_count": safe_int(
+            experiment_metadata.get("grid_obstacle_spatial_index_algorithm_count")
+        ),
+        "experiment_grid_optimization_mode": experiment_metadata.get("grid_optimization_mode"),
         "source_config_path": experiment_data.get("source_config_path"),
         "config_name": config.get("name"),
         "config_instance_count": config.get("instance_count"),
@@ -231,13 +273,16 @@ def parse_experiment_file(experiment_path: str | Path) -> tuple[list[dict[str, A
         found_by_algorithm_count = 0
         failed_algorithm_count = 0
         no_path_algorithm_count = 0
+        graph_timed_run_count = 0
         found_runtime_values: list[float] = []
         found_path_length_values: list[float] = []
 
         for run in runs:
             algorithm_id = run.get("algorithm_id")
             algorithm_config = top_level_algorithm_map.get(algorithm_id, {})
-            resolved_params = ((run.get("debug_info") or {}).get("resolved_params")) or {}
+            debug_info = run.get("debug_info") or {}
+            graph_timing_info = debug_info.get("graph_timing") or {}
+            resolved_params = (debug_info.get("resolved_params")) or {}
             algorithm_params = resolved_params or algorithm_config.get("params") or {}
 
             path_found = bool(run.get("path_found", False))
@@ -246,6 +291,63 @@ def parse_experiment_file(experiment_path: str | Path) -> tuple[list[dict[str, A
             path_metrics = run.get("path_metrics", {}) or {}
             path_length_raw = safe_float(path_metrics.get("path_length"))
             relative_path_length_raw = safe_float(path_metrics.get("relative_path_length"))
+            graph_build_time_ms_raw = safe_float(
+                first_non_null(run.get("graph_build_time_ms"), graph_timing_info.get("build_time_ms"))
+            )
+            graph_search_time_ms_raw = safe_float(
+                first_non_null(run.get("graph_search_time_ms"), graph_timing_info.get("search_time_ms"))
+            )
+            graph_path_extraction_time_ms_raw = safe_float(
+                first_non_null(
+                    run.get("graph_path_extraction_time_ms"),
+                    graph_timing_info.get("path_extraction_time_ms"),
+                )
+            )
+            graph_node_count_raw = safe_int(
+                first_non_null(run.get("graph_node_count"), graph_timing_info.get("node_count"))
+            )
+            graph_edge_count_raw = safe_int(
+                first_non_null(run.get("graph_edge_count"), graph_timing_info.get("edge_count"))
+            )
+            graph_expanded_nodes_raw = safe_int(
+                first_non_null(run.get("graph_expanded_nodes"), graph_timing_info.get("expanded_nodes"))
+            )
+
+            graph_timing_parts = [
+                value
+                for value in (
+                    graph_build_time_ms_raw,
+                    graph_search_time_ms_raw,
+                    graph_path_extraction_time_ms_raw,
+                )
+                if value is not None
+            ]
+            graph_measured_time_ms_raw = sum(graph_timing_parts) if graph_timing_parts else None
+            graph_build_search_time_ms_raw = (
+                graph_build_time_ms_raw + graph_search_time_ms_raw
+                if graph_build_time_ms_raw is not None and graph_search_time_ms_raw is not None
+                else None
+            )
+            graph_timing_residual_ms_raw = (
+                runtime_ms_raw - graph_measured_time_ms_raw
+                if runtime_ms_raw is not None and graph_measured_time_ms_raw is not None
+                else None
+            )
+            graph_build_share_of_runtime = (
+                graph_build_time_ms_raw / runtime_ms_raw
+                if graph_build_time_ms_raw is not None and runtime_ms_raw not in (None, 0.0)
+                else None
+            )
+            graph_search_share_of_runtime = (
+                graph_search_time_ms_raw / runtime_ms_raw
+                if graph_search_time_ms_raw is not None and runtime_ms_raw not in (None, 0.0)
+                else None
+            )
+            graph_build_share_of_build_search = (
+                graph_build_time_ms_raw / graph_build_search_time_ms_raw
+                if graph_build_time_ms_raw is not None and graph_build_search_time_ms_raw not in (None, 0.0)
+                else None
+            )
 
             if path_found:
                 found_by_algorithm_count += 1
@@ -257,12 +359,15 @@ def parse_experiment_file(experiment_path: str | Path) -> tuple[list[dict[str, A
                 failed_algorithm_count += 1
             elif algorithm_status == "NoPath":
                 no_path_algorithm_count += 1
+            if graph_build_time_ms_raw is not None or graph_search_time_ms_raw is not None:
+                graph_timed_run_count += 1
 
             run_record = {
                 **scene_base,
                 **scene_metric_fields,
                 **flatten_mapping(algorithm_params, "alg_param"),
                 "algorithm_id": algorithm_id,
+                "is_graph_algorithm": algorithm_id in GRAPH_ALGORITHM_IDS,
                 "algorithm_status": algorithm_status,
                 "algorithm_was_executed": algorithm_status in {"Success", "NoPath", "Failed"},
                 "algorithm_not_run": algorithm_status == "NotRun",
@@ -272,11 +377,27 @@ def parse_experiment_file(experiment_path: str | Path) -> tuple[list[dict[str, A
                 "algorithm_params_json": json_text(algorithm_params),
                 "algorithm_resolved_params_json": json_text(resolved_params),
                 "algorithm_debug_info_json": json_text(run.get("debug_info") or {}),
+                "alg_param_use_obstacle_spatial_index": bool(
+                    algorithm_params.get("use_obstacle_spatial_index", False)
+                ),
                 "path_found": path_found,
                 "algorithm_error_message": run.get("error_message"),
                 "runtime_ms_raw": runtime_ms_raw,
                 "runtime_ms_path_only": runtime_ms_raw if path_found and runtime_ms_raw is not None else -1.0,
                 "runtime_ms_no_path_only": runtime_ms_raw if (not path_found and algorithm_status == "NoPath" and runtime_ms_raw is not None) else -1.0,
+                "has_graph_timing": graph_build_time_ms_raw is not None or graph_search_time_ms_raw is not None,
+                "graph_build_time_ms_raw": graph_build_time_ms_raw,
+                "graph_search_time_ms_raw": graph_search_time_ms_raw,
+                "graph_path_extraction_time_ms_raw": graph_path_extraction_time_ms_raw,
+                "graph_build_search_time_ms_raw": graph_build_search_time_ms_raw,
+                "graph_measured_time_ms_raw": graph_measured_time_ms_raw,
+                "graph_timing_residual_ms_raw": graph_timing_residual_ms_raw,
+                "graph_build_share_of_runtime": graph_build_share_of_runtime,
+                "graph_search_share_of_runtime": graph_search_share_of_runtime,
+                "graph_build_share_of_build_search": graph_build_share_of_build_search,
+                "graph_node_count": graph_node_count_raw,
+                "graph_edge_count": graph_edge_count_raw,
+                "graph_expanded_nodes": graph_expanded_nodes_raw,
                 "path_length_raw": path_length_raw,
                 "path_length_path_only": path_length_raw if path_found and path_length_raw is not None else -1.0,
                 "relative_path_length_raw": relative_path_length_raw,
@@ -299,6 +420,7 @@ def parse_experiment_file(experiment_path: str | Path) -> tuple[list[dict[str, A
             "found_by_algorithm_count": found_by_algorithm_count,
             "failed_algorithm_count": failed_algorithm_count,
             "no_path_algorithm_count": no_path_algorithm_count,
+            "graph_timed_run_count": graph_timed_run_count,
             "best_found_runtime_ms": min(found_runtime_values) if found_runtime_values else None,
             "best_found_path_length": min(found_path_length_values) if found_path_length_values else None,
         }
@@ -333,12 +455,33 @@ def build_analysis_run_dataset(run_df: pd.DataFrame) -> pd.DataFrame:
     analysis_df["algorithm_success"] = analysis_df["algorithm_success"].fillna(False).astype(bool)
     analysis_df["scene_is_generated"] = analysis_df["scene_is_generated"].fillna(False).astype(bool)
     analysis_df["scene_is_completed"] = analysis_df["scene_is_completed"].fillna(False).astype(bool)
+    if "is_graph_algorithm" in analysis_df.columns:
+        analysis_df["is_graph_algorithm"] = analysis_df["is_graph_algorithm"].fillna(False).astype(bool)
+    if "has_graph_timing" in analysis_df.columns:
+        analysis_df["has_graph_timing"] = analysis_df["has_graph_timing"].fillna(False).astype(bool)
+    if "experiment_grid_obstacle_spatial_index_enabled" in analysis_df.columns:
+        analysis_df["experiment_grid_obstacle_spatial_index_enabled"] = (
+            analysis_df["experiment_grid_obstacle_spatial_index_enabled"].fillna(False).astype(bool)
+        )
+    if "alg_param_use_obstacle_spatial_index" in analysis_df.columns:
+        analysis_df["alg_param_use_obstacle_spatial_index"] = (
+            analysis_df["alg_param_use_obstacle_spatial_index"].fillna(False).astype(bool)
+        )
 
     float_fill_columns = (
         "runtime_ms_raw",
         "runtime_ms_no_path_only",
         "path_length_raw",
         "relative_path_length_raw",
+        "graph_build_time_ms_raw",
+        "graph_search_time_ms_raw",
+        "graph_path_extraction_time_ms_raw",
+        "graph_build_search_time_ms_raw",
+        "graph_measured_time_ms_raw",
+        "graph_timing_residual_ms_raw",
+        "graph_build_share_of_runtime",
+        "graph_search_share_of_runtime",
+        "graph_build_share_of_build_search",
         "scene_width",
         "scene_height",
         "scene_area",
@@ -351,6 +494,7 @@ def build_analysis_run_dataset(run_df: pd.DataFrame) -> pd.DataFrame:
         "config_scene_width",
         "config_scene_height",
         "config_start_goal_min_distance",
+        "experiment_scene_sample_fraction",
     )
     for column in float_fill_columns:
         if column in analysis_df.columns:
@@ -362,6 +506,12 @@ def build_analysis_run_dataset(run_df: pd.DataFrame) -> pd.DataFrame:
         "scene_index",
         "scene_seed",
         "scene_obstacle_count",
+        "graph_node_count",
+        "graph_edge_count",
+        "graph_expanded_nodes",
+        "experiment_source_instance_count",
+        "experiment_sampled_scene_count",
+        "experiment_grid_obstacle_spatial_index_algorithm_count",
         "config_obstacles_max_attempts_per_obstacle",
         "config_start_goal_max_attempts",
         "config_metrics_worker_threads",
@@ -378,7 +528,11 @@ def build_analysis_run_dataset(run_df: pd.DataFrame) -> pd.DataFrame:
         "algorithm_error_message",
         "config_name",
         "experiment_name",
+        "experiment_study_mode",
+        "experiment_scene_sampling_method",
+        "experiment_grid_optimization_mode",
         "source_config_path",
+        "experiment_metadata_json",
         "config_scene_json",
         "config_obstacles_json",
         "config_start_goal_json",
@@ -391,6 +545,16 @@ def build_analysis_run_dataset(run_df: pd.DataFrame) -> pd.DataFrame:
             analysis_df[column] = analysis_df[column].fillna("")
 
     analysis_df["runtime_ms"] = analysis_df["runtime_ms_raw"]
+    if "graph_build_time_ms_raw" in analysis_df.columns:
+        analysis_df["graph_build_time_ms"] = analysis_df["graph_build_time_ms_raw"]
+    if "graph_search_time_ms_raw" in analysis_df.columns:
+        analysis_df["graph_search_time_ms"] = analysis_df["graph_search_time_ms_raw"]
+    if "graph_path_extraction_time_ms_raw" in analysis_df.columns:
+        analysis_df["graph_path_extraction_time_ms"] = analysis_df["graph_path_extraction_time_ms_raw"]
+    if "graph_build_search_time_ms_raw" in analysis_df.columns:
+        analysis_df["graph_build_search_time_ms"] = analysis_df["graph_build_search_time_ms_raw"]
+    if "graph_timing_residual_ms_raw" in analysis_df.columns:
+        analysis_df["graph_timing_residual_ms"] = analysis_df["graph_timing_residual_ms_raw"]
     analysis_df["path_length"] = analysis_df["path_length_path_only"].fillna(-1.0)
     analysis_df["relative_path_length"] = analysis_df["relative_path_length_path_only"].fillna(-1.0)
 
@@ -402,6 +566,14 @@ def build_analysis_run_dataset(run_df: pd.DataFrame) -> pd.DataFrame:
         "config_name",
         "experiment_file",
         "experiment_name",
+        "experiment_study_mode",
+        "experiment_scene_sample_fraction",
+        "experiment_source_instance_count",
+        "experiment_sampled_scene_count",
+        "experiment_scene_sampling_method",
+        "experiment_grid_obstacle_spatial_index_enabled",
+        "experiment_grid_obstacle_spatial_index_algorithm_count",
+        "experiment_grid_optimization_mode",
         "source_config_path",
         "scene_id",
         "scene_index",
@@ -422,6 +594,7 @@ def build_analysis_run_dataset(run_df: pd.DataFrame) -> pd.DataFrame:
         "scene_goal_y",
         "scene_direct_distance",
         "algorithm_id",
+        "is_graph_algorithm",
         "algorithm_status",
         "algorithm_was_executed",
         "algorithm_not_run",
@@ -430,9 +603,28 @@ def build_analysis_run_dataset(run_df: pd.DataFrame) -> pd.DataFrame:
         "algorithm_success",
         "path_found",
         "algorithm_error_message",
+        "alg_param_use_obstacle_spatial_index",
         "runtime_ms",
         "runtime_ms_raw",
         "runtime_ms_no_path_only",
+        "has_graph_timing",
+        "graph_build_time_ms",
+        "graph_search_time_ms",
+        "graph_path_extraction_time_ms",
+        "graph_build_search_time_ms",
+        "graph_timing_residual_ms",
+        "graph_build_time_ms_raw",
+        "graph_search_time_ms_raw",
+        "graph_path_extraction_time_ms_raw",
+        "graph_build_search_time_ms_raw",
+        "graph_measured_time_ms_raw",
+        "graph_timing_residual_ms_raw",
+        "graph_build_share_of_runtime",
+        "graph_search_share_of_runtime",
+        "graph_build_share_of_build_search",
+        "graph_node_count",
+        "graph_edge_count",
+        "graph_expanded_nodes",
         "path_length",
         "path_length_raw",
         "relative_path_length",
@@ -451,6 +643,7 @@ def build_analysis_run_dataset(run_df: pd.DataFrame) -> pd.DataFrame:
         "config_obstacles_json",
         "config_start_goal_json",
         "config_metrics_json",
+        "experiment_metadata_json",
         "algorithm_params_json",
         "algorithm_resolved_params_json",
     ]
@@ -498,6 +691,7 @@ def build_experiment_dataset(experiments_dir: str | Path) -> ExperimentDatasetBu
         "completed_scene_count": int(file_df["completed_scene_count"].sum()),
         "path_found_run_count": int(file_df["path_found_run_count"].sum()),
         "failed_run_count": int(file_df["failed_run_count"].sum()),
+        "graph_timed_run_count": int(file_df["graph_timed_run_count"].sum()),
     }
 
     return ExperimentDatasetBundle(
@@ -585,7 +779,7 @@ def get_dataset_cache_info(
         raise FileNotFoundError(f"No '*_experiment.json' files found in: {experiments_dir}")
 
     try:
-        saved_paths = get_dataset_bundle_paths(output_dir, prefix=prefix)
+            saved_paths = get_dataset_bundle_paths(output_dir, prefix=prefix)
     except FileNotFoundError as exc:
         return {
             "cache_available": False,

@@ -125,6 +125,6 @@ namespace algorithms::graph {
         [[nodiscard]] double calculate_distance(const geometry::Point& a, const geometry::Point& b) const;
     };
 
-} // namespace algorithms::graph
+}
 
-#endif // ALGORITHMS_VISIBILITY_GRAPH_BUILDER_H
+#endif

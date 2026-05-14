@@ -5,6 +5,7 @@
 #include "../config/GeneratorConfig.h"
 #include <atomic>
 #include <string>
+#include <vector>
 
 #include <nlohmann/json.hpp>
 
@@ -20,6 +21,9 @@ namespace experiment {
 
         static void generate_instances(Experiment& experiment,
                                        std::atomic<std::size_t>* generated_counter = nullptr);
+        static void generate_instances_for_indices(Experiment& experiment,
+                                                  const std::vector<std::size_t>& scene_indices,
+                                                  std::atomic<std::size_t>* generated_counter = nullptr);
 
         static std::size_t estimate_total_algorithm_runs(const Experiment& experiment);
         static std::size_t estimate_total_algorithm_runs_for_scene(const Experiment& experiment,
@@ -34,8 +38,6 @@ namespace experiment {
         static bool save_algorithm_report_json(const Experiment& experiment, const std::string& filepath);
     };
 
-} // namespace experiment
+}
 
-#endif // EXPERIMENT_EXPERIMENT_SERVICE_H
-
-
+#endif

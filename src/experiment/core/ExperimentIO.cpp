@@ -2,6 +2,7 @@
 #include "experiment/config/GeneratorConfigIO.h"
 #include "serialization/SceneSerializer.h"
 
+#include <cstddef>
 #include <fstream>
 #include <stdexcept>
 
@@ -170,6 +171,16 @@ namespace experiment {
             return j[key].get<double>();
         }
 
+        std::optional<std::size_t> optional_size_t(const json& j, const char* key, const std::string& path) {
+            if (!j.contains(key) || j[key].is_null()) {
+                return std::nullopt;
+            }
+            if (!j[key].is_number_unsigned()) {
+                throw std::runtime_error(path + "." + key + " must be an unsigned integer or null");
+            }
+            return j[key].get<std::size_t>();
+        }
+
         json algorithm_config_to_json(const AlgorithmConfig& config) {
             return json{{"id", config.id}, {"enabled", config.enabled}, {"params", config.params}};
         }
@@ -248,6 +259,12 @@ namespace experiment {
             j["status"] = to_string(run.status);
             j["success"] = run.success;
             j["runtime_ms"] = run.runtime_ms;
+            set_optional(j, "graph_build_time_ms", run.graph_build_time_ms);
+            set_optional(j, "graph_search_time_ms", run.graph_search_time_ms);
+            set_optional(j, "graph_path_extraction_time_ms", run.graph_path_extraction_time_ms);
+            set_optional(j, "graph_node_count", run.graph_node_count);
+            set_optional(j, "graph_edge_count", run.graph_edge_count);
+            set_optional(j, "graph_expanded_nodes", run.graph_expanded_nodes);
             j["path_found"] = run.path.has_value();
             j["path"] = run.path.has_value() ? serialization::SceneSerializer::to_json(run.path.value()) : json(nullptr);
             j["path_metrics"] = path_metrics_to_json(run.path_metrics);
@@ -285,6 +302,12 @@ namespace experiment {
                 }
                 run.runtime_ms = j["runtime_ms"].get<double>();
             }
+            run.graph_build_time_ms = optional_double(j, "graph_build_time_ms", path);
+            run.graph_search_time_ms = optional_double(j, "graph_search_time_ms", path);
+            run.graph_path_extraction_time_ms = optional_double(j, "graph_path_extraction_time_ms", path);
+            run.graph_node_count = optional_size_t(j, "graph_node_count", path);
+            run.graph_edge_count = optional_size_t(j, "graph_edge_count", path);
+            run.graph_expanded_nodes = optional_size_t(j, "graph_expanded_nodes", path);
 
             if (j.contains("path_found") && !j["path_found"].is_boolean()) {
                 throw std::runtime_error(path + ".path_found must be a boolean");
@@ -400,6 +423,7 @@ namespace experiment {
         j["global_seed"] = experiment.global_seed;
         j["status"] = to_string(experiment.status);
         j["source_config_path"] = experiment.source_config_path;
+        j["metadata"] = experiment.metadata.is_object() ? experiment.metadata : json::object();
         j["generator_config_snapshot"] = GeneratorConfigIO::to_json(experiment.generator_config_snapshot);
 
         json algorithms = json::array();
@@ -466,6 +490,12 @@ namespace experiment {
             }
             experiment.source_config_path = j["source_config_path"].get<std::string>();
         }
+        if (j.contains("metadata")) {
+            if (!j["metadata"].is_object()) {
+                throw std::runtime_error("metadata must be an object");
+            }
+            experiment.metadata = j["metadata"];
+        }
 
         if (!j.contains("generator_config_snapshot")) {
             throw std::runtime_error("generator_config_snapshot is required");
@@ -525,6 +555,4 @@ namespace experiment {
         }
     }
 
-} // namespace experiment
-
-
+}

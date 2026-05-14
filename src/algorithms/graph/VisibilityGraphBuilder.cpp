@@ -78,7 +78,7 @@ namespace algorithms::graph {
             return std::max({1.0, avg_radius * 2.0, area_based * 0.5});
         }
 
-    } // namespace
+    }
 
     VisibilityGraphBuilder::VisibilityGraphBuilder(const int points_per_obstacle)
         : points_per_obstacle_(points_per_obstacle) {
@@ -668,4 +668,4 @@ namespace algorithms::graph {
         return a.distance(b);
     }
 
-} // namespace algorithms::graph
+}

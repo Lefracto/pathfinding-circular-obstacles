@@ -17,6 +17,6 @@ namespace experiment {
         static GeneratorConfig load_from_file(const std::string& filepath);
     };
 
-} // namespace experiment
+}
 
-#endif // EXPERIMENT_GENERATOR_CONFIG_IO_H
+#endif

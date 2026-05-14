@@ -1,7 +1,3 @@
-//
-// Created for serialization of Scene, Path, and related geometry structures
-//
-
 #ifndef SERIALIZATION_SCENE_SERIALIZER_H
 #define SERIALIZATION_SCENE_SERIALIZER_H
 
@@ -9,10 +5,6 @@
 #include "../geometry/Path.h"
 #include <string>
 #include <fstream>
-
-// nlohmann/json is a header-only library
-// If not available, download from: https://github.com/nlohmann/json
-// Or install via vcpkg: vcpkg install nlohmann-json
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
@@ -40,7 +32,3 @@ namespace serialization {
 }
 
 #endif
-
-
-
-

@@ -1,4 +1,4 @@
-#include "algorithms/search/GraphSearch.h"
+#include "../../include/algorithms/GraphSearch.h"
 
 #include <algorithm>
 #include <cmath>
@@ -22,7 +22,7 @@ namespace algorithms::search {
             }
         };
 
-    } // namespace
+    }
 
     GraphSearchResult shortest_path(const graph::Graph& graph,
                                     const std::size_t start_node,
@@ -126,4 +126,4 @@ namespace algorithms::search {
         return result;
     }
 
-} // namespace algorithms::search
+}

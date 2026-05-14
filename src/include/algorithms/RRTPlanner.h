@@ -35,6 +35,6 @@ namespace algorithms {
         Config config_;
     };
 
-} // namespace algorithms
+}
 
-#endif // ALGORITHMS_RRT_PLANNER_H
+#endif

@@ -1,7 +1,3 @@
-//
-// Created by USER on 26/12/2025.
-//
-
 #ifndef VISUALIZATION_SCENE_RENDERER_H
 #define VISUALIZATION_SCENE_RENDERER_H
 
@@ -13,9 +9,6 @@
 
 namespace visualization {
 
-    /**
-     * Configuration structure for rendering colors and settings
-     */
     struct RenderConfig {
         // Grid settings
         double grid_step = 10.0;
@@ -37,18 +30,12 @@ namespace visualization {
         sf::Color path_color = sf::Color::Yellow;
         double path_point_radius = 3.0;
         
-        /**
-         * Get default preset configuration
-         */
         static RenderConfig default_preset() {
             RenderConfig config;
             // Values are already set as defaults above
             return config;
         }
         
-        /**
-         * Get alternative preset with sharper grid and yellow semi-transparent circles
-         */
         static RenderConfig alternative_preset() {
             RenderConfig config;
             config.grid_step = 10.0;
@@ -63,16 +50,10 @@ namespace visualization {
         }
     };
 
-    /**
-     * Handles rendering of scene elements (grid, obstacles, path, etc.)
-     */
     class SceneRenderer {
     public:
         SceneRenderer();
 
-        /**
-         * Apply a render configuration preset
-         */
         void apply_config(const RenderConfig& config);
 
         // Legacy setters for backward compatibility
@@ -83,9 +64,6 @@ namespace visualization {
         void set_path_color(const sf::Color& color) { config_.path_color = color; }
         void set_grid_color(const sf::Color& color) { config_.grid_color = color; }
         
-        /**
-         * Get current configuration
-         */
         const RenderConfig& get_config() const { return config_; }
 
         void draw_grid(sf::RenderWindow& window, const geometry::Scene& scene,
@@ -105,6 +83,4 @@ namespace visualization {
 
 }
 
-#endif //VISUALIZATION_SCENE_RENDERER_H
-
-
+#endif

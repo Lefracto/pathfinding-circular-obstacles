@@ -17,8 +17,9 @@ namespace algorithms {
             const nlohmann::json& params = nlohmann::json::object());
 
         [[nodiscard]] static bool supports(const std::string& algorithm_id);
+        [[nodiscard]] static bool is_graph_algorithm(const std::string& algorithm_id);
     };
 
-} // namespace algorithms
+}
 
-#endif // ALGORITHMS_PLANNER_FACTORY_H
+#endif

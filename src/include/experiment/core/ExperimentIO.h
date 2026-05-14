@@ -17,6 +17,6 @@ namespace experiment {
         static Experiment load_from_file(const std::string& filepath);
     };
 
-} // namespace experiment
+}
 
-#endif // EXPERIMENT_EXPERIMENT_IO_H
+#endif

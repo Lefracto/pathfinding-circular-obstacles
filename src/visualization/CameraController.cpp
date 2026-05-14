@@ -1,7 +1,3 @@
-//
-// Created by USER on 26/12/2025.
-//
-
 #include "../include/visualization/CameraController.h"
 #include <algorithm>
 #include <cmath>
@@ -348,9 +344,3 @@ namespace visualization {
     }
 
 }
-
-
-
-
-
-

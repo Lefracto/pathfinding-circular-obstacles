@@ -1,0 +1,13 @@
+feature,feature_label,importance,importance_std,importance_source,selected_candidate
+scene_obstacle_count,obstacle count,0.10036877302670963,0.003472031916694013,manual_permutation_importance_compact,flat::hist_gradient_boosting|b=0.60|g=0.90|d=0.40|trim=0.05
+scene_metric_obstacle_area_ratio,obstacle area ratio,0.030195914594485784,0.002078382529858036,manual_permutation_importance_compact,flat::hist_gradient_boosting|b=0.60|g=0.90|d=0.40|trim=0.05
+scene_direct_distance,direct distance,0.02435496188106534,0.0016351623873622767,manual_permutation_importance_compact,flat::hist_gradient_boosting|b=0.60|g=0.90|d=0.40|trim=0.05
+scene_metric_cell_density_cv,cell density CV,0.01499796129025266,0.0017301141872817505,manual_permutation_importance_compact,flat::hist_gradient_boosting|b=0.60|g=0.90|d=0.40|trim=0.05
+scene_metric_boundary_density,boundary density,0.014274864471662485,1.6780402414262596e-05,manual_permutation_importance_compact,flat::hist_gradient_boosting|b=0.60|g=0.90|d=0.40|trim=0.05
+scene_boundary_area_interaction,boundary * area ratio,0.010086495184902178,0.000746119280850055,manual_permutation_importance_compact,flat::hist_gradient_boosting|b=0.60|g=0.90|d=0.40|trim=0.05
+scene_metric_largest_component_ratio,largest component ratio,0.008862881169654946,0.0005936285623814319,manual_permutation_importance_compact,flat::hist_gradient_boosting|b=0.60|g=0.90|d=0.40|trim=0.05
+scene_metric_clearance,clearance,0.007199827887288124,0.00048571282671106,manual_permutation_importance_compact,flat::hist_gradient_boosting|b=0.60|g=0.90|d=0.40|trim=0.05
+scene_obstacle_density,obstacle density,0.004625726817327092,0.0022541826914946883,manual_permutation_importance_compact,flat::hist_gradient_boosting|b=0.60|g=0.90|d=0.40|trim=0.05
+scene_metric_radii_cv,radii CV,0.0028074851766802245,0.0005649667507043321,manual_permutation_importance_compact,flat::hist_gradient_boosting|b=0.60|g=0.90|d=0.40|trim=0.05
+scene_direct_distance_ratio,distance / sqrt(area),0.0025657220042215045,0.0007825310953847864,manual_permutation_importance_compact,flat::hist_gradient_boosting|b=0.60|g=0.90|d=0.40|trim=0.05
+scene_start_goal_dx_norm,|goal x - start x| / width,0.0013211055365942026,0.001358795130821655,manual_permutation_importance_compact,flat::hist_gradient_boosting|b=0.60|g=0.90|d=0.40|trim=0.05

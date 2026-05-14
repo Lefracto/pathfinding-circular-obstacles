@@ -64,6 +64,12 @@ namespace experiment {
         AlgorithmRunStatus status = AlgorithmRunStatus::NotRun;
         bool success = false;
         double runtime_ms = 0.0;
+        std::optional<double> graph_build_time_ms = std::nullopt;
+        std::optional<double> graph_search_time_ms = std::nullopt;
+        std::optional<double> graph_path_extraction_time_ms = std::nullopt;
+        std::optional<std::size_t> graph_node_count = std::nullopt;
+        std::optional<std::size_t> graph_edge_count = std::nullopt;
+        std::optional<std::size_t> graph_expanded_nodes = std::nullopt;
         std::optional<geometry::Path> path = std::nullopt;
         PathMetrics path_metrics;
         nlohmann::json debug_info = nlohmann::json::object();
@@ -89,11 +95,12 @@ namespace experiment {
         std::uint32_t global_seed = 0;
         ExperimentStatus status = ExperimentStatus::Draft;
         std::string source_config_path;
+        nlohmann::json metadata = nlohmann::json::object();
         GeneratorConfig generator_config_snapshot;
         std::vector<AlgorithmConfig> algorithms;
         std::vector<SceneInstance> instances;
     };
 
-} // namespace experiment
+}
 
-#endif // EXPERIMENT_EXPERIMENT_MODEL_H
+#endif

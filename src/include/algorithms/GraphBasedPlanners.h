@@ -9,7 +9,9 @@ namespace algorithms {
 
     class GridDijkstraPlanner final : public Planner {
     public:
-        explicit GridDijkstraPlanner(double grid_step = 5.0, bool allow_diagonal = true);
+        explicit GridDijkstraPlanner(double grid_step = 5.0,
+                                     bool allow_diagonal = true,
+                                     bool use_obstacle_spatial_index = false);
 
         [[nodiscard]] PathResult find_path(const geometry::Scene& scene) override;
         [[nodiscard]] BenchmarkResult plan(const geometry::Scene& scene) override;
@@ -21,7 +23,9 @@ namespace algorithms {
 
     class GridAStarPlanner final : public Planner {
     public:
-        explicit GridAStarPlanner(double grid_step = 5.0, bool allow_diagonal = true);
+        explicit GridAStarPlanner(double grid_step = 5.0,
+                                  bool allow_diagonal = true,
+                                  bool use_obstacle_spatial_index = false);
 
         [[nodiscard]] PathResult find_path(const geometry::Scene& scene) override;
         [[nodiscard]] BenchmarkResult plan(const geometry::Scene& scene) override;
@@ -55,6 +59,6 @@ namespace algorithms {
         graph::VisibilityGraphBuilder builder_;
     };
 
-} // namespace algorithms
+}
 
-#endif // ALGORITHMS_GRAPH_BASED_PLANNERS_H
+#endif

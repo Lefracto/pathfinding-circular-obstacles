@@ -74,13 +74,23 @@ namespace algorithms {
         if (algorithm_id == "grid_dijkstra") {
             const double grid_step = read_double(params, "grid_step", 5.0);
             const bool allow_diagonal = read_bool(params, "allow_diagonal", true);
-            return std::make_unique<GridDijkstraPlanner>(grid_step, allow_diagonal);
+            const bool use_obstacle_spatial_index =
+                read_bool(params, "use_obstacle_spatial_index", false);
+            return std::make_unique<GridDijkstraPlanner>(
+                grid_step,
+                allow_diagonal,
+                use_obstacle_spatial_index);
         }
 
         if (algorithm_id == "grid_astar") {
             const double grid_step = read_double(params, "grid_step", 5.0);
             const bool allow_diagonal = read_bool(params, "allow_diagonal", true);
-            return std::make_unique<GridAStarPlanner>(grid_step, allow_diagonal);
+            const bool use_obstacle_spatial_index =
+                read_bool(params, "use_obstacle_spatial_index", false);
+            return std::make_unique<GridAStarPlanner>(
+                grid_step,
+                allow_diagonal,
+                use_obstacle_spatial_index);
         }
 
         if (algorithm_id == "visibility_dijkstra") {
@@ -118,4 +128,11 @@ namespace algorithms {
                algorithm_id == "rrt";
     }
 
-} // namespace algorithms
+    bool PlannerFactory::is_graph_algorithm(const std::string& algorithm_id) {
+        return algorithm_id == "grid_dijkstra" ||
+               algorithm_id == "grid_astar" ||
+               algorithm_id == "visibility_dijkstra" ||
+               algorithm_id == "visibility_astar";
+    }
+
+}

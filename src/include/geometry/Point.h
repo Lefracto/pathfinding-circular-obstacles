@@ -1,7 +1,3 @@
-//
-// Created by USER on 26/12/2025.
-//
-
 #ifndef GEOMETRY_POINT_H
 #define GEOMETRY_POINT_H
 

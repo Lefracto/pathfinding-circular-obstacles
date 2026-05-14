@@ -225,6 +225,25 @@ namespace experiment {
         return instances;
     }
 
-} // namespace experiment
+    std::vector<SceneInstance> SceneBatchGenerator::generate_instances_for_indices(
+        const GeneratorConfig& config,
+        const std::vector<std::size_t>& scene_indices,
+        std::atomic<std::size_t>* completed_counter) {
+        std::vector<SceneInstance> instances;
+        instances.reserve(scene_indices.size());
 
+        if (completed_counter != nullptr) {
+            completed_counter->store(0);
+        }
 
+        for (const std::size_t index : scene_indices) {
+            instances.push_back(generate_instance(config, index));
+            if (completed_counter != nullptr) {
+                completed_counter->fetch_add(1);
+            }
+        }
+
+        return instances;
+    }
+
+}

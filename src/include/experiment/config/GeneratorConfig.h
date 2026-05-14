@@ -159,6 +159,6 @@ namespace experiment {
         bool save_debug_structures = false;
     };
 
-} // namespace experiment
+}
 
-#endif // EXPERIMENT_GENERATOR_CONFIG_H
+#endif

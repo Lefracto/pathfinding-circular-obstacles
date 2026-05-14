@@ -307,7 +307,4 @@ namespace algorithms {
         return "rrt";
     }
 
-} // namespace algorithms
-
-
-
+}

@@ -44,6 +44,6 @@ namespace experiment {
                                     const SceneMetricsComputationOptions& options = {});
     };
 
-} // namespace experiment
+}
 
-#endif // EXPERIMENT_SCENE_METRICS_CALCULATOR_H
+#endif

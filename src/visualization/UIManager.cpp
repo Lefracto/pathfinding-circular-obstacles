@@ -1,14 +1,12 @@
-//
-// Created by USER on 26/12/2025.
-//
-
 #include "../include/visualization/UIManager.h"
+#include "../include/visualization/AppInfo.h"
+#include "../include/visualization/AppAssets.h"
 
 namespace {
-    constexpr const char* kProjectTitle = "Experiment Workspace";
-    constexpr const char* kProjectVersion = "0.1.0";
+    constexpr const char* kProjectTitle = visualization::app_info::display_name;
+    constexpr const char* kProjectVersion = visualization::app_info::version;
     constexpr const char* kProjectAuthor = "Anton Pauliuchyk";
-    constexpr const char* kProjectUpdatedAt = "2026-03-14";
+    constexpr const char* kProjectUpdatedAt = "2026-05-14";
     constexpr const char* kProjectGithub = "https://github.com/Lefracto/pathfinding-circular-obstacles";
     constexpr const char* kProjectEmail = "ampavlyuchik@edu.hse.ru";
     constexpr const char* kProjectAnnotation =
@@ -32,6 +30,7 @@ namespace visualization {
         }
 
         load_fonts();
+        load_app_icon();
         setup_style();
         initialized_ = true;
         return true;
@@ -117,6 +116,14 @@ namespace visualization {
 
         if (!ImGui::SFML::UpdateFontTexture()) {
             // Font texture update failed, but continue anyway.
+        }
+    }
+
+    void UIManager::load_app_icon() {
+        const auto icon_image = app_assets::load_app_icon();
+        app_icon_texture_ready_ = icon_image.has_value() && app_icon_texture_.loadFromImage(*icon_image);
+        if (app_icon_texture_ready_) {
+            app_icon_texture_.setSmooth(true);
         }
     }
 
@@ -240,7 +247,7 @@ namespace visualization {
             return;
         }
 
-        ImGui::SetNextWindowSize(ImVec2(640.0f, 320.0f), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowSize(ImVec2(700.0f, 360.0f), ImGuiCond_FirstUseEver);
         ImGui::SetNextWindowPos(ImVec2(120.0f, 90.0f), ImGuiCond_FirstUseEver);
 
         if (!ImGui::Begin("About Project", &about_window_open_,
@@ -249,11 +256,18 @@ namespace visualization {
             return;
         }
 
+        if (app_icon_texture_ready_) {
+            ImGui::Image(app_icon_texture_, sf::Vector2f(96.0f, 96.0f));
+            ImGui::SameLine();
+        }
+
+        ImGui::BeginGroup();
         ImGui::Text("%s", kProjectTitle);
         ImGui::Separator();
         ImGui::Text("Version: %s", kProjectVersion);
         ImGui::Text("Author: %s", kProjectAuthor);
         ImGui::Text("Last Updated: %s", kProjectUpdatedAt);
+        ImGui::EndGroup();
 
         ImGui::Spacing();
         ImGui::TextWrapped("%s", kProjectAnnotation);
@@ -282,5 +296,3 @@ namespace visualization {
     }
 
 }
-
-

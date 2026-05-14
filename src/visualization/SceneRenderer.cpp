@@ -1,9 +1,4 @@
-//
-// Created by USER on 26/12/2025.
-//
-
 #include "../include/visualization/SceneRenderer.h"
-#include <algorithm>
 #include <cmath>
 
 namespace visualization {
@@ -19,7 +14,6 @@ namespace visualization {
                                   std::function<double()> get_scale) {
         sf::VertexArray lines(sf::PrimitiveType::Lines);
 
-        // Vertical lines
         for (double x = 0; x <= scene.width; x += config_.grid_step) {
             sf::Vector2f p1 = scene_to_screen({x, 0});
             sf::Vector2f p2 = scene_to_screen({x, scene.height});
@@ -27,7 +21,6 @@ namespace visualization {
             lines.append(sf::Vertex(p2, config_.grid_color));
         }
 
-        // Horizontal lines
         for (double y = 0; y <= scene.height; y += config_.grid_step) {
             sf::Vector2f p1 = scene_to_screen({0, y});
             sf::Vector2f p2 = scene_to_screen({scene.width, y});
@@ -57,7 +50,6 @@ namespace visualization {
 
     void SceneRenderer::draw_start_goal(sf::RenderWindow& window, const geometry::Scene& scene,
                                          std::function<sf::Vector2f(const geometry::Point&)> scene_to_screen) {
-        // Start point
         sf::CircleShape start_circle(config_.start_goal_radius);
         start_circle.setFillColor(config_.start_color);
         start_circle.setOutlineColor(config_.start_goal_outline_color);
@@ -67,7 +59,6 @@ namespace visualization {
         start_circle.setPosition(start_pos - sf::Vector2f(config_.start_goal_radius, config_.start_goal_radius));
         window.draw(start_circle);
 
-        // Goal point
         sf::CircleShape goal_circle(config_.start_goal_radius);
         goal_circle.setFillColor(config_.goal_color);
         goal_circle.setOutlineColor(config_.start_goal_outline_color);
@@ -82,7 +73,6 @@ namespace visualization {
                                   std::function<sf::Vector2f(const geometry::Point&)> scene_to_screen) {
         if (path.points.empty()) return;
 
-        // Draw lines
         for (std::size_t i = 0; i < path.points.size() - 1; ++i) {
             sf::Vertex line[] = {
                 sf::Vertex(scene_to_screen(path.points[i]), config_.path_color),
@@ -91,7 +81,6 @@ namespace visualization {
             window.draw(line, 2, sf::PrimitiveType::Lines);
         }
 
-        // Draw path points
         for (const auto& point : path.points) {
             sf::CircleShape path_point(config_.path_point_radius);
             path_point.setFillColor(config_.path_color);
@@ -103,6 +92,3 @@ namespace visualization {
     }
 
 }
-
-
-

@@ -1,14 +1,9 @@
-//
-// Implementation of SceneSerializer
-//
-
 #include "../include/serialization/SceneSerializer.h"
 #include <stdexcept>
 #include <iostream>
 
 namespace serialization {
 
-    // Point serialization
     json SceneSerializer::point_to_json(const geometry::Point& point) {
         return json{
             {"x", point.x},
@@ -26,7 +21,6 @@ namespace serialization {
         return geometry::Point(j["x"].get<double>(), j["y"].get<double>());
     }
 
-    // Disk serialization
     json SceneSerializer::disk_to_json(const geometry::Disk& disk) {
         return json{
             {"center", point_to_json(disk.center)},
@@ -55,7 +49,6 @@ namespace serialization {
         return disk;
     }
 
-    // Scene serialization
     json SceneSerializer::to_json(const geometry::Scene& scene) {
         json j;
         j["width"] = scene.width;
@@ -103,7 +96,6 @@ namespace serialization {
         return scene;
     }
 
-    // Path serialization
     json SceneSerializer::to_json(const geometry::Path& path) {
         json j;
         json points_array = json::array();
@@ -133,7 +125,6 @@ namespace serialization {
         return path;
     }
 
-    // File I/O for Scene
     bool SceneSerializer::save_to_file(const geometry::Scene& scene, const std::string& filepath) {
         try {
             json j = to_json(scene);
@@ -142,7 +133,7 @@ namespace serialization {
                 std::cerr << "Error: Cannot open file for writing: " << filepath << std::endl;
                 return false;
             }
-            file << j.dump(4); // Pretty print with 4-space indentation
+            file << j.dump(4);
             file.close();
             return true;
         } catch (const std::exception& e) {
@@ -170,7 +161,6 @@ namespace serialization {
         }
     }
 
-    // File I/O for Path
     bool SceneSerializer::save_path_to_file(const geometry::Path& path, const std::string& filepath) {
         try {
             json j = to_json(path);
@@ -206,9 +196,4 @@ namespace serialization {
             throw std::runtime_error("Error loading Path from file: " + std::string(e.what()));
         }
     }
-
-} // namespace serialization
-
-
-
-
+}

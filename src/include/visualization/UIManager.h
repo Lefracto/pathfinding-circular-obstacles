@@ -1,7 +1,3 @@
-//
-// Created by USER on 26/12/2025.
-//
-
 #ifndef VISUALIZATION_UI_MANAGER_H
 #define VISUALIZATION_UI_MANAGER_H
 
@@ -11,9 +7,6 @@
 
 namespace visualization {
 
-    /**
-     * Manages ImGui UI initialization, styling, and menu rendering.
-     */
     class UIManager {
     public:
         UIManager();
@@ -33,10 +26,13 @@ namespace visualization {
     private:
         void setup_style();
         void load_fonts();
+        void load_app_icon();
         void draw_menu_bar();
         void draw_about_window();
 
         bool initialized_ = false;
+        sf::Texture app_icon_texture_;
+        bool app_icon_texture_ready_ = false;
         bool create_experiment_requested_ = false;
         bool open_config_requested_ = false;
         bool run_config_folder_requested_ = false;
@@ -48,4 +44,4 @@ namespace visualization {
 
 }
 
-#endif // VISUALIZATION_UI_MANAGER_H
+#endif

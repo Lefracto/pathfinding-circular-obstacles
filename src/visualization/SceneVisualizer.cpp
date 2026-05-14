@@ -1,13 +1,12 @@
-//
-// Created by USER on 26/12/2025.
-//
-
 #include "../include/visualization/SceneVisualizer.h"
+#include "../include/visualization/AppInfo.h"
+#include "../include/visualization/AppAssets.h"
 #include "../include/experiment/core/ExperimentIO.h"
 #include "../include/experiment/core/ExperimentService.h"
 #include "../include/experiment/config/GeneratorConfigIO.h"
 #include "../include/experiment/metrics/SceneMetricsBatchCalculator.h"
 #include "../include/algorithms/GridGraphBuilder.h"
+#include "../include/algorithms/PlannerFactory.h"
 #include <imgui.h>
 #include <algorithm>
 #include <chrono>
@@ -250,6 +249,14 @@ namespace {
         std::size_t skipped_json_count = 0;
     };
 
+    struct BatchStudyOptions {
+        std::string output_folder_name = "experiment_runs";
+        std::string completion_label = "Config-folder batch";
+        bool graph_timing_mode = false;
+        bool enable_grid_obstacle_spatial_index = false;
+        double scene_sample_fraction = 1.0;
+    };
+
     void set_batch_study_text_state(const std::shared_ptr<BatchStudyProgressState>& progress,
                                     const std::string& stage,
                                     const std::string& current_config_file,
@@ -297,8 +304,87 @@ namespace {
         return value;
     }
 
+    std::size_t resolve_scene_sample_count(const std::size_t total_count, const double sample_fraction) {
+        if (total_count == 0) {
+            return 0;
+        }
+        if (!(sample_fraction > 0.0) || sample_fraction >= 1.0) {
+            return total_count;
+        }
+        const auto sample_count = static_cast<std::size_t>(
+            std::ceil(static_cast<double>(total_count) * sample_fraction));
+        return std::clamp<std::size_t>(sample_count, 1, total_count);
+    }
+
+    std::vector<std::size_t> build_even_scene_sample_indices(const std::size_t total_count,
+                                                             const double sample_fraction) {
+        const std::size_t sample_count = resolve_scene_sample_count(total_count, sample_fraction);
+        std::vector<std::size_t> indices;
+        indices.reserve(sample_count);
+
+        if (sample_count == 0) {
+            return indices;
+        }
+        if (sample_count >= total_count) {
+            for (std::size_t index = 0; index < total_count; ++index) {
+                indices.push_back(index);
+            }
+            return indices;
+        }
+        if (sample_count == 1) {
+            indices.push_back(0);
+            return indices;
+        }
+
+        for (std::size_t i = 0; i < sample_count; ++i) {
+            const double t = static_cast<double>(i) / static_cast<double>(sample_count - 1);
+            const auto index = static_cast<std::size_t>(
+                std::llround(t * static_cast<double>(total_count - 1)));
+            if (indices.empty() || indices.back() != index) {
+                indices.push_back(index);
+            }
+        }
+
+        for (std::size_t index = 0; indices.size() < sample_count && index < total_count; ++index) {
+            if (std::find(indices.begin(), indices.end(), index) == indices.end()) {
+                indices.push_back(index);
+            }
+        }
+
+        std::sort(indices.begin(), indices.end());
+        return indices;
+    }
+
+    std::size_t keep_only_graph_algorithms(std::vector<experiment::AlgorithmConfig>& algorithms) {
+        std::size_t enabled_graph_algorithm_count = 0;
+        for (auto& algorithm : algorithms) {
+            algorithm.enabled = algorithm.enabled &&
+                algorithms::PlannerFactory::is_graph_algorithm(algorithm.id);
+            if (algorithm.enabled) {
+                ++enabled_graph_algorithm_count;
+            }
+        }
+        return enabled_graph_algorithm_count;
+    }
+
+    std::size_t enable_grid_obstacle_spatial_index(std::vector<experiment::AlgorithmConfig>& algorithms) {
+        std::size_t updated_algorithm_count = 0;
+        for (auto& algorithm : algorithms) {
+            if (!algorithm.enabled) {
+                continue;
+            }
+            if (algorithm.id != "grid_dijkstra" && algorithm.id != "grid_astar") {
+                continue;
+            }
+            algorithm.params["use_obstacle_spatial_index"] = true;
+            ++updated_algorithm_count;
+        }
+        return updated_algorithm_count;
+    }
+
     BatchStudyResult run_config_folder_batch(const std::filesystem::path& folder_path,
-                                             const std::shared_ptr<BatchStudyProgressState>& progress) {
+                                             const std::shared_ptr<BatchStudyProgressState>& progress,
+                                             const BatchStudyOptions& options = {}) {
         BatchStudyResult result;
 
         if (progress == nullptr) {
@@ -357,7 +443,9 @@ namespace {
         for (const auto& json_path : json_files) {
             try {
                 const auto config = experiment::GeneratorConfigIO::load_from_file(json_path.string());
-                total_scene_count += config.instance_count;
+                total_scene_count += options.graph_timing_mode
+                    ? resolve_scene_sample_count(config.instance_count, options.scene_sample_fraction)
+                    : config.instance_count;
                 configs.push_back({json_path, config});
             } catch (...) {
                 ++result.skipped_json_count;
@@ -372,47 +460,114 @@ namespace {
         progress->total_configs.store(result.total_valid_configs);
         progress->total_scene_count.store(total_scene_count);
 
-        result.output_directory = folder_path / "experiment_runs";
+        result.output_directory = folder_path / options.output_folder_name;
         std::filesystem::create_directories(result.output_directory);
 
         {
             std::lock_guard<std::mutex> lock(progress->text_mutex);
             progress->output_folder = result.output_directory.string();
+            if (options.graph_timing_mode) {
+                progress->note = "Graph timing study: 10% scene sample, enabled graph algorithms only.";
+                if (options.enable_grid_obstacle_spatial_index) {
+                    progress->note += " Grid obstacle spatial index enabled.";
+                }
+            } else if (options.enable_grid_obstacle_spatial_index) {
+                progress->note =
+                    "Full config-folder batch: optimized grid graph construction enabled.";
+            }
             if (result.skipped_json_count > 0) {
-                progress->note = "Skipped " + std::to_string(result.skipped_json_count) +
-                                 " non-generator JSON file(s).";
+                if (!progress->note.empty()) {
+                    progress->note += " ";
+                }
+                progress->note += "Skipped " + std::to_string(result.skipped_json_count) +
+                                  " non-generator JSON file(s).";
             }
         }
 
         for (const auto& entry : configs) {
             const std::string config_file = entry.path.filename().string();
+            const std::vector<std::size_t> sampled_scene_indices = options.graph_timing_mode
+                ? build_even_scene_sample_indices(entry.config.instance_count, options.scene_sample_fraction)
+                : std::vector<std::size_t>{};
+            const std::size_t active_scene_count = options.graph_timing_mode
+                ? sampled_scene_indices.size()
+                : entry.config.instance_count;
 
             try {
+                experiment::GeneratorConfig execution_config = entry.config;
+                std::size_t enabled_graph_algorithm_count = 0;
+                std::size_t spatial_index_grid_algorithm_count = 0;
+                if (options.graph_timing_mode) {
+                    enabled_graph_algorithm_count = keep_only_graph_algorithms(execution_config.algorithms);
+                }
+                if (options.enable_grid_obstacle_spatial_index) {
+                    spatial_index_grid_algorithm_count =
+                        enable_grid_obstacle_spatial_index(execution_config.algorithms);
+                }
+
                 const std::string experiment_name =
-                    entry.config.name.empty() ? entry.path.stem().string() : entry.config.name;
+                    execution_config.name.empty() ? entry.path.stem().string() : execution_config.name;
                 experiment::Experiment experiment =
-                    experiment::ExperimentService::create_experiment(entry.config,
+                    experiment::ExperimentService::create_experiment(execution_config,
                                                                     experiment_name,
                                                                     entry.path.string());
 
-                progress->current_scene_total.store(entry.config.instance_count);
+                if (options.graph_timing_mode) {
+                    experiment.metadata["study_mode"] = "graph_timing";
+                    experiment.metadata["scene_sample_fraction"] = options.scene_sample_fraction;
+                    experiment.metadata["source_instance_count"] = entry.config.instance_count;
+                    experiment.metadata["sampled_scene_count"] = sampled_scene_indices.size();
+                    experiment.metadata["selected_scene_indices_zero_based"] = sampled_scene_indices;
+                    experiment.metadata["scene_sampling_method"] = "even_spread_by_original_index";
+                    experiment.metadata["algorithm_filter"] = "enabled_graph_algorithms_only";
+                    experiment.metadata["enabled_graph_algorithm_count"] = enabled_graph_algorithm_count;
+                    experiment.metadata["grid_obstacle_spatial_index_enabled"] =
+                        options.enable_grid_obstacle_spatial_index;
+                    experiment.metadata["grid_obstacle_spatial_index_algorithm_count"] =
+                        spatial_index_grid_algorithm_count;
+                    experiment.metadata["grid_optimization_mode"] =
+                        options.enable_grid_obstacle_spatial_index
+                            ? "spatial_index_dense_cells_single_pass_edges"
+                            : "baseline";
+                } else if (options.enable_grid_obstacle_spatial_index) {
+                    experiment.metadata["study_mode"] = "full_optimized_grid_batch";
+                    experiment.metadata["scene_sample_fraction"] = 1.0;
+                    experiment.metadata["source_instance_count"] = entry.config.instance_count;
+                    experiment.metadata["sampled_scene_count"] = entry.config.instance_count;
+                    experiment.metadata["scene_sampling_method"] = "all_original_indices";
+                    experiment.metadata["algorithm_filter"] = "all_enabled_algorithms";
+                    experiment.metadata["grid_obstacle_spatial_index_enabled"] = true;
+                    experiment.metadata["grid_obstacle_spatial_index_algorithm_count"] =
+                        spatial_index_grid_algorithm_count;
+                    experiment.metadata["grid_optimization_mode"] =
+                        "spatial_index_dense_cells_single_pass_edges";
+                }
+
+                progress->current_scene_total.store(active_scene_count);
                 progress->current_scene_completed.store(0);
                 progress->current_algorithm_total.store(0);
                 progress->current_algorithm_completed.store(0);
 
                 set_batch_study_text_state(progress, "Generating Scenes", config_file);
-                experiment::ExperimentService::generate_instances(
-                    experiment,
-                    &progress->current_scene_completed);
-                progress->current_scene_completed.store(entry.config.instance_count);
+                if (options.graph_timing_mode) {
+                    experiment::ExperimentService::generate_instances_for_indices(
+                        experiment,
+                        sampled_scene_indices,
+                        &progress->current_scene_completed);
+                } else {
+                    experiment::ExperimentService::generate_instances(
+                        experiment,
+                        &progress->current_scene_completed);
+                }
+                progress->current_scene_completed.store(active_scene_count);
 
-                if (!entry.config.metrics.auto_compute_on_generation) {
+                if (!execution_config.metrics.auto_compute_on_generation) {
                     set_batch_study_text_state(progress, "Computing Metrics", config_file);
                     progress->current_scene_completed.store(0);
                     const experiment::SceneMetricsBatchResult metrics_result =
                         experiment::SceneMetricsBatchCalculator::compute(
                             experiment.instances,
-                            entry.config.metrics,
+                            execution_config.metrics,
                             &progress->current_scene_completed);
 
                     const std::size_t metrics_count =
@@ -420,7 +575,7 @@ namespace {
                     for (std::size_t i = 0; i < metrics_count; ++i) {
                         experiment.instances[i].scene_metrics = metrics_result.metrics[i];
                     }
-                    progress->current_scene_completed.store(entry.config.instance_count);
+                    progress->current_scene_completed.store(active_scene_count);
                 } else {
                     set_batch_study_text_state(progress, "Metrics Ready", config_file,
                                                "Metrics were auto-computed during generation.");
@@ -461,18 +616,30 @@ namespace {
                 ++result.saved_experiment_count;
 
                 progress->processed_configs.fetch_add(1);
-                progress->processed_scene_count.fetch_add(entry.config.instance_count);
+                progress->processed_scene_count.fetch_add(active_scene_count);
                 {
                     std::lock_guard<std::mutex> lock(progress->text_mutex);
                     progress->last_saved_file = save_path.string();
-                    if (result.skipped_json_count == 0) {
+                    if (options.graph_timing_mode) {
+                        progress->note = "Graph timing study: sampled " +
+                                         std::to_string(active_scene_count) + " of " +
+                                         std::to_string(entry.config.instance_count) +
+                                         " scene(s) and kept only enabled graph algorithms.";
+                        if (options.enable_grid_obstacle_spatial_index) {
+                            progress->note += " Grid obstacle spatial index enabled.";
+                        }
+                    } else if (options.enable_grid_obstacle_spatial_index) {
+                        progress->note = "Full config-folder batch: processed " +
+                                         std::to_string(active_scene_count) +
+                                         " scene(s) with optimized grid graph construction.";
+                    } else if (result.skipped_json_count == 0) {
                         progress->note.clear();
                     }
                 }
             } catch (const std::exception& e) {
                 ++result.failed_config_count;
                 progress->processed_configs.fetch_add(1);
-                progress->processed_scene_count.fetch_add(entry.config.instance_count);
+                progress->processed_scene_count.fetch_add(active_scene_count);
                 progress->current_scene_total.store(0);
                 progress->current_scene_completed.store(0);
                 progress->current_algorithm_total.store(0);
@@ -483,6 +650,16 @@ namespace {
 
         std::string summary_note =
             "Saved " + std::to_string(result.saved_experiment_count) + " experiment(s).";
+        if (options.graph_timing_mode) {
+            summary_note += " Graph timing mode used a " +
+                            std::to_string(static_cast<int>(std::round(options.scene_sample_fraction * 100.0))) +
+                            "% scene sample and graph algorithms only.";
+            if (options.enable_grid_obstacle_spatial_index) {
+                summary_note += " Grid obstacle spatial index was enabled.";
+            }
+        } else if (options.enable_grid_obstacle_spatial_index) {
+            summary_note += " Full optimized grid mode used all enabled algorithms and all scenes.";
+        }
         if (result.failed_config_count > 0) {
             summary_note += " Failed configs: " + std::to_string(result.failed_config_count) + ".";
         }
@@ -508,6 +685,12 @@ namespace {
         texture.update(window);
         const sf::Image image = texture.copyToImage();
         return image.saveToFile(output_path);
+    }
+
+    void apply_app_icon(sf::RenderWindow& window) {
+        if (const auto icon = visualization::app_assets::load_app_icon()) {
+            window.setIcon(*icon);
+        }
     }
 
     std::string experiment_status_to_text(experiment::SceneGenerationStatus status) {
@@ -1319,7 +1502,8 @@ namespace visualization {
         settings.antiAliasingLevel = 8;
 
         sf::RenderWindow window(sf::VideoMode({window_width_, window_height_}),
-                               "Scene Visualization", sf::State::Windowed, settings);
+                               app_info::scene_window_title, sf::State::Windowed, settings);
+        apply_app_icon(window);
         window.setFramerateLimit(60);
 
         // Initialize UI Manager
@@ -1446,7 +1630,8 @@ namespace visualization {
         settings.antiAliasingLevel = 8;
 
         sf::RenderWindow window(sf::VideoMode({window_width_, window_height_}),
-                                "Experiment Workspace", sf::State::Windowed, settings);
+                                app_info::workspace_window_title, sf::State::Windowed, settings);
+        apply_app_icon(window);
         window.setFramerateLimit(60);
 
         if (!ui_manager_.initialize(window)) {
@@ -1613,7 +1798,11 @@ namespace visualization {
                             algorithm_path_visibility.clear();
                         }
 
-                        status_message_ = "Config-folder batch completed. Saved " +
+                        const bool graph_timing_batch =
+                            batch_result.output_directory.filename().string() == "graph_timing_runs";
+                        status_message_ = std::string(graph_timing_batch
+                                                      ? "Graph timing study completed. Saved "
+                                                      : "Config-folder batch completed. Saved ") +
                                           std::to_string(batch_result.saved_experiment_count) +
                                           " experiment(s)";
                         if (batch_result.failed_config_count > 0) {
@@ -1968,6 +2157,20 @@ namespace visualization {
                             ImGui::Text("%s", run.algorithm_id.c_str());
                             ImGui::Text("Status: %s", algorithm_status_to_text(run.status).c_str());
                             ImGui::Text("Runtime: %.3f ms", run.runtime_ms);
+                            if (run.graph_build_time_ms.has_value() || run.graph_search_time_ms.has_value()) {
+                                ImGui::Text("Graph Build: %.3f ms",
+                                            run.graph_build_time_ms.value_or(0.0));
+                                ImGui::Text("Graph Search: %.3f ms",
+                                            run.graph_search_time_ms.value_or(0.0));
+                                if (run.graph_node_count.has_value() || run.graph_edge_count.has_value()) {
+                                    ImGui::Text("Graph Size: nodes=%zu, edges=%zu",
+                                                run.graph_node_count.value_or(0),
+                                                run.graph_edge_count.value_or(0));
+                                }
+                                if (run.graph_expanded_nodes.has_value()) {
+                                    ImGui::Text("Expanded Nodes: %zu", run.graph_expanded_nodes.value());
+                                }
+                            }
                             draw_optional_metric("Path Length", run.path_metrics.path_length);
                             draw_optional_metric("Relative Path Length", run.path_metrics.relative_path_length);
                             if (run.path.has_value()) {
@@ -2008,7 +2211,7 @@ namespace visualization {
 
             if (ImGui::CollapsingHeader("Config Folder Batch", ImGuiTreeNodeFlags_DefaultOpen)) {
                 if (batch_study_progress == nullptr) {
-                    ImGui::TextWrapped("Use File -> Run Config Folder... to process every JSON config in a folder.");
+                    ImGui::TextWrapped("Use the File menu to process JSON configs in a folder.");
                 } else {
                     const BatchStudyProgressSnapshot batch_snapshot =
                         snapshot_batch_study_progress(batch_study_progress);
@@ -2095,7 +2298,7 @@ namespace visualization {
                     }
                     if (!batch_folder_task_running) {
                         ImGui::Separator();
-                        ImGui::TextWrapped("Batch is idle. Start a new one from File -> Run Config Folder...");
+                        ImGui::TextWrapped("Batch is idle. Start a new one from the File menu.");
                     }
                 }
             }
@@ -2474,11 +2677,26 @@ namespace visualization {
                                                ImVec2(10.0f, 10.0f));
                             ImGui::SameLine();
                             if (run.path_metrics.path_length.has_value()) {
-                                ImGui::Text("len=%.3f, t=%.3f ms",
-                                            run.path_metrics.path_length.value(),
-                                            run.runtime_ms);
+                                if (run.graph_build_time_ms.has_value() || run.graph_search_time_ms.has_value()) {
+                                    ImGui::Text("len=%.3f, t=%.3f ms, build=%.3f, search=%.3f",
+                                                run.path_metrics.path_length.value(),
+                                                run.runtime_ms,
+                                                run.graph_build_time_ms.value_or(0.0),
+                                                run.graph_search_time_ms.value_or(0.0));
+                                } else {
+                                    ImGui::Text("len=%.3f, t=%.3f ms",
+                                                run.path_metrics.path_length.value(),
+                                                run.runtime_ms);
+                                }
                             } else {
-                                ImGui::Text("len=N/A, t=%.3f ms", run.runtime_ms);
+                                if (run.graph_build_time_ms.has_value() || run.graph_search_time_ms.has_value()) {
+                                    ImGui::Text("len=N/A, t=%.3f ms, build=%.3f, search=%.3f",
+                                                run.runtime_ms,
+                                                run.graph_build_time_ms.value_or(0.0),
+                                                run.graph_search_time_ms.value_or(0.0));
+                                } else {
+                                    ImGui::Text("len=N/A, t=%.3f ms", run.runtime_ms);
+                                }
                             }
                         }
                     }
@@ -2659,24 +2877,29 @@ namespace visualization {
             if (ui_manager_.consume_run_config_folder_request()) {
                 if (metrics_task_running_ || algorithm_run_task_running || batch_folder_task_running) {
                     status_message_ =
-                        "Cannot start config-folder batch while another background task is running.";
+                        "Cannot start optimized-grid config-folder batch while another background task is running.";
                 } else {
                     try {
-                        const auto selected_folder = show_select_folder_dialog("Select Config Folder");
+                        const auto selected_folder =
+                            show_select_folder_dialog("Select Config Folder for Optimized Grid Batch");
                         if (selected_folder.has_value()) {
                             batch_study_progress = std::make_shared<BatchStudyProgressState>();
                             const std::filesystem::path folder_path(selected_folder.value());
+                            BatchStudyOptions options;
+                            options.output_folder_name = "experiment_runs";
+                            options.completion_label = "Optimized grid config-folder batch";
+                            options.enable_grid_obstacle_spatial_index = true;
                             batch_folder_task_future = std::async(
                                 std::launch::async,
-                                [folder_path, progress = batch_study_progress]() {
-                                    return run_config_folder_batch(folder_path, progress);
+                                [folder_path, progress = batch_study_progress, options]() {
+                                    return run_config_folder_batch(folder_path, progress, options);
                                 });
                             batch_folder_task_running = true;
-                            status_message_ = "Config-folder batch started...";
+                            status_message_ = "Optimized-grid config-folder batch started...";
                         }
                     } catch (const std::exception& e) {
                         batch_study_progress.reset();
-                        status_message_ = std::string("Config-folder batch start failed: ") + e.what();
+                        status_message_ = std::string("Optimized-grid batch start failed: ") + e.what();
                     }
                 }
             }
@@ -2801,11 +3024,4 @@ namespace visualization {
         }
     }
 
-} // namespace visualization
-
-
-
-
-
-
-
+}

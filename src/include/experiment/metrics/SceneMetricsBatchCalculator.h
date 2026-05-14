@@ -19,6 +19,6 @@ namespace experiment {
                                                std::atomic<std::size_t>* completed_counter = nullptr);
     };
 
-} // namespace experiment
+}
 
-#endif // EXPERIMENT_SCENE_METRICS_BATCH_CALCULATOR_H
+#endif
